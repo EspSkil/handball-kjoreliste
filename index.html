@@ -63,9 +63,6 @@
       box-shadow: 0 0 30px rgba(0,0,0,.04);
     }
 
-
-    /* HEADER */
-
     .header {
       background: linear-gradient(
         135deg,
@@ -111,9 +108,6 @@
       opacity: .86;
     }
 
-
-    /* TABS */
-
     .toolbar {
       padding: 16px 14px 6px;
       background: white;
@@ -155,9 +149,6 @@
       color: white;
     }
 
-
-    /* CONTENT */
-
     .content {
       padding: 8px 14px 35px;
     }
@@ -176,9 +167,6 @@
       font-size: 21px;
       font-weight: 850;
     }
-
-
-    /* CARDS */
 
     .ride-card {
       display: grid;
@@ -202,10 +190,6 @@
       border-radius: 14px;
 
       box-shadow: var(--shadow);
-
-      transition:
-        opacity .2s,
-        background .2s;
     }
 
     .date-box {
@@ -240,7 +224,6 @@
       font-size: 30px;
       font-weight: 900;
       line-height: 1;
-
       margin: 3px 0;
     }
 
@@ -248,9 +231,6 @@
       font-size: 12px;
       font-weight: 750;
     }
-
-
-    /* DETAILS */
 
     .details {
       min-width: 0;
@@ -260,9 +240,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-
       margin: 5px 0;
-
       font-size: 15px;
     }
 
@@ -272,12 +250,8 @@
       flex-shrink: 0;
     }
 
-
-    /* DRIVER */
-
     .assignment {
       min-width: 0;
-
       border-left: 1px solid var(--border);
       padding-left: 12px;
     }
@@ -285,12 +259,9 @@
     .assignment-label {
       font-size: 11px;
       color: var(--muted);
-
       font-weight: 850;
-
       text-transform: uppercase;
       letter-spacing: .35px;
-
       margin-bottom: 4px;
     }
 
@@ -298,10 +269,8 @@
       display: flex;
       align-items: center;
       gap: 7px;
-
       font-size: 17px;
       font-weight: 850;
-
       line-height: 1.1;
     }
 
@@ -309,22 +278,14 @@
       font-size: 22px;
     }
 
-
-    /* SWAP */
-
     .swap-button {
       border: 0;
       border-radius: 10px;
-
       background: var(--green-soft);
       color: #157842;
-
       padding: 10px 7px;
-
       font-weight: 850;
-
       cursor: pointer;
-
       min-height: 64px;
     }
 
@@ -335,23 +296,15 @@
 
     .swap-icon {
       display: block;
-
       font-size: 25px;
       line-height: 1;
-
       margin-bottom: 3px;
     }
 
-
-    /* PAST RIDES */
-
     .ride-card.past {
       background: var(--past-bg);
-
       color: var(--past-text);
-
       box-shadow: none;
-
       opacity: .68;
     }
 
@@ -371,27 +324,17 @@
     .ride-card.past .swap-button {
       background: #e0e3e6;
       color: #9a9fa5;
-
       cursor: default;
       pointer-events: none;
     }
 
-
-    /* HOLIDAY */
-
     .holiday {
       margin-top: 18px;
-
       border: 1px solid #eda2a2;
-
       background: var(--red-soft);
-
       border-radius: 14px;
-
       padding: 15px;
-
       color: #a92f2f;
-
       display: flex;
       align-items: center;
       gap: 12px;
@@ -408,25 +351,16 @@
 
     .holiday-text {
       margin-top: 2px;
-
       color: #4e5662;
-
       font-size: 14px;
     }
 
-
-    /* FOOTER */
-
     .footer-card {
       margin-top: 18px;
-
       border: 1px solid var(--border);
       border-radius: 14px;
-
       background: white;
-
       padding: 15px;
-
       display: flex;
       align-items: center;
       gap: 12px;
@@ -442,60 +376,38 @@
 
     .footer-text {
       color: var(--muted);
-
       font-size: 13px;
-
       margin-top: 2px;
     }
 
-
-    /* STATUS */
-
     .status {
       padding: 35px 15px;
-
       text-align: center;
-
       color: var(--muted);
     }
 
     .status-icon {
       font-size: 32px;
-
       margin-bottom: 8px;
     }
 
     .error-box {
       margin: 25px 0;
-
       padding: 18px;
-
       border-radius: 12px;
-
       background: #fff0f0;
-
       color: #a32d2d;
-
       border: 1px solid #efb0b0;
     }
 
-
-    /* MODAL */
-
     .modal-backdrop {
       position: fixed;
-
       inset: 0;
-
       background: rgba(5,18,30,.55);
-
       display: none;
-
       align-items: center;
       justify-content: center;
-
       padding: 14px;
-
       z-index: 100;
     }
 
@@ -505,26 +417,18 @@
 
     .modal {
       width: min(620px,100%);
-
       max-height: 92vh;
       overflow-y: auto;
-
       background: white;
-
       border-radius: 16px;
-
-      box-shadow:
-        0 24px 60px rgba(0,0,0,.22);
-
+      box-shadow: 0 24px 60px rgba(0,0,0,.22);
       padding: 18px;
     }
 
     .modal-header {
       display: flex;
-
       justify-content: space-between;
       align-items: flex-start;
-
       gap: 12px;
     }
 
@@ -535,112 +439,117 @@
 
     .modal-date {
       color: var(--muted);
-
       margin-top: 3px;
-
       font-size: 14px;
     }
 
     .close-button {
       border: 0;
       background: transparent;
-
       font-size: 25px;
-
       cursor: pointer;
     }
 
     .change-grid {
       display: grid;
-
       grid-template-columns: 1fr 1fr;
-
       gap: 14px;
-
       margin-top: 18px;
     }
 
     .change-box {
       border: 1px solid var(--border);
-
       border-radius: 12px;
-
       padding: 12px;
     }
 
     .change-label {
       font-size: 12px;
-
       font-weight: 850;
-
       text-transform: uppercase;
-
       color: var(--muted);
-
       margin-bottom: 5px;
     }
 
     .current-driver {
       font-size: 18px;
-
       font-weight: 900;
-
       margin-bottom: 10px;
     }
 
     select {
       width: 100%;
-
       border: 1px solid #bec7d2;
-
       border-radius: 9px;
-
       padding: 10px 11px;
-
       background: white;
-
       color: var(--text);
     }
 
-    .modal-note {
+    .pin-wrap {
       margin-top: 18px;
+      text-align: center;
+    }
 
-      padding: 11px;
-
-      border-radius: 9px;
-
-      background: #fff8e7;
-
-      border: 1px solid #efd79a;
-
-      color: #765c17;
-
+    .pin-label {
       font-size: 13px;
+      font-weight: 850;
+      margin-bottom: 7px;
+    }
+
+    .pin-input {
+      width: 150px;
+      text-align: center;
+      letter-spacing: 8px;
+      font-weight: 900;
+      font-size: 20px;
+      border: 1px solid #aeb8c4;
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    .pin-help {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    .modal-message {
+      display: none;
+      margin-top: 14px;
+      padding: 11px;
+      border-radius: 9px;
+      font-size: 13px;
+    }
+
+    .modal-message.error {
+      display: block;
+      background: #fff0f0;
+      color: #a42d2d;
+      border: 1px solid #efb0b0;
+    }
+
+    .modal-message.success {
+      display: block;
+      background: var(--green-soft);
+      color: #176e42;
+      border: 1px solid #b9e0ca;
     }
 
     .modal-actions {
       display: flex;
-
       justify-content: flex-end;
-
       gap: 10px;
-
       margin-top: 18px;
-
       padding-top: 15px;
-
       border-top: 1px solid var(--border);
     }
 
     .btn {
       border-radius: 9px;
-
       padding: 10px 16px;
-
       font-weight: 850;
-
       cursor: pointer;
-
       border: 1px solid var(--border);
     }
 
@@ -650,29 +559,25 @@
     }
 
     .btn-save {
-      background: #dfe3e7;
+      background: var(--green);
+      border-color: var(--green);
+      color: white;
+    }
 
-      border-color: #dfe3e7;
-
-      color: #8b9197;
-
+    .btn-save:disabled {
+      background: #b9c1c9;
+      border-color: #b9c1c9;
       cursor: default;
     }
 
-
-    /* MOBILE */
-
     @media (max-width: 720px) {
-
       .app {
         max-width: 100%;
         box-shadow: none;
       }
 
       .header {
-        padding:
-          18px 14px
-          16px;
+        padding: 18px 14px 16px;
       }
 
       .header h1 {
@@ -682,7 +587,6 @@
       .logo {
         width: 47px;
         height: 47px;
-
         font-size: 23px;
       }
 
@@ -698,7 +602,6 @@
 
       .tab {
         font-size: 12px;
-
         padding: 12px 5px;
       }
 
@@ -718,15 +621,12 @@
           "date from swap";
 
         gap: 7px 9px;
-
         padding: 8px;
       }
 
       .date-box {
         grid-area: date;
-
         min-height: 110px;
-
         align-self: stretch;
       }
 
@@ -748,16 +648,12 @@
 
       .assignment {
         border-left: 0;
-
         border-top: 1px solid var(--border);
-
-        padding:
-          6px 0 0;
+        padding: 6px 0 0;
       }
 
       .assignment-label {
         font-size: 10px;
-
         margin-bottom: 2px;
       }
 
@@ -771,11 +667,8 @@
 
       .swap-button {
         grid-area: swap;
-
         min-height: 100%;
-
         padding: 7px 4px;
-
         font-size: 12px;
       }
 
@@ -785,7 +678,6 @@
 
       .detail-row {
         font-size: 13px;
-
         margin: 3px 0;
       }
 
@@ -795,22 +687,17 @@
 
       .modal-actions {
         display: grid;
-
-        grid-template-columns:
-          1fr 1.2fr;
+        grid-template-columns: 1fr 1.2fr;
       }
     }
-
   </style>
 </head>
-
 
 <body>
 
 <div class="app">
 
   <header class="header">
-
     <div class="header-row">
 
       <div class="logo">
@@ -818,44 +705,26 @@
       </div>
 
       <div>
-
-        <h1>
-          Kjøreliste håndball
-        </h1>
-
-        <div class="season">
-          Høsten 2026
-        </div>
-
+        <h1>Kjøreliste håndball</h1>
+        <div class="season">Høsten 2026</div>
       </div>
 
     </div>
-
   </header>
-
 
   <div class="toolbar">
 
     <div class="tabs">
 
-      <button
-        class="tab active"
-        data-mode="2"
-      >
+      <button class="tab active" data-mode="2">
         Denne + neste uke
       </button>
 
-      <button
-        class="tab"
-        data-mode="4"
-      >
+      <button class="tab" data-mode="4">
         Neste 4 uker
       </button>
 
-      <button
-        class="tab"
-        data-mode="all"
-      >
+      <button class="tab" data-mode="all">
         Hele planen
       </button>
 
@@ -863,20 +732,11 @@
 
   </div>
 
-
-  <main
-    class="content"
-    id="schedule"
-  >
+  <main class="content" id="schedule">
 
     <div class="status">
-
-      <div class="status-icon">
-        ⏳
-      </div>
-
+      <div class="status-icon">⏳</div>
       Henter kjøreliste...
-
     </div>
 
   </main>
@@ -884,13 +744,7 @@
 </div>
 
 
-
-<!-- BYTTE-VINDU -->
-
-<div
-  class="modal-backdrop"
-  id="modalBackdrop"
->
+<div class="modal-backdrop" id="modalBackdrop">
 
   <div class="modal">
 
@@ -902,18 +756,11 @@
           Endre kjøring
         </div>
 
-        <div
-          class="modal-date"
-          id="modalDate"
-        ></div>
+        <div class="modal-date" id="modalDate"></div>
 
       </div>
 
-
-      <button
-        class="close-button"
-        id="closeModal"
-      >
+      <button class="close-button" id="closeModal">
         ×
       </button>
 
@@ -928,38 +775,19 @@
           Til trening
         </div>
 
-        <div
-          class="current-driver"
-          id="currentTo"
-        ></div>
-
+        <div class="current-driver" id="currentTo"></div>
 
         <div class="change-label">
           Velg ny
         </div>
 
         <select id="newTo">
-
-          <option value="">
-            Ingen endring
-          </option>
-
-          <option value="Frid">
-            Frid
-          </option>
-
-          <option value="Hermine">
-            Hermine
-          </option>
-
-          <option value="Malin">
-            Malin
-          </option>
-
-          <option value="Jentene">
-            Jentene
-          </option>
-
+          <option value="">Ingen endring</option>
+          <option value="Frid">Frid</option>
+          <option value="Hermine">Hermine</option>
+          <option value="Malin">Malin</option>
+          <option value="Jentene">Jentene</option>
+          <option value="Ingen">Ingen</option>
         </select>
 
       </div>
@@ -971,38 +799,19 @@
           Hente
         </div>
 
-        <div
-          class="current-driver"
-          id="currentFrom"
-        ></div>
-
+        <div class="current-driver" id="currentFrom"></div>
 
         <div class="change-label">
           Velg ny
         </div>
 
         <select id="newFrom">
-
-          <option value="">
-            Ingen endring
-          </option>
-
-          <option value="Frid">
-            Frid
-          </option>
-
-          <option value="Hermine">
-            Hermine
-          </option>
-
-          <option value="Malin">
-            Malin
-          </option>
-
-          <option value="Jentene">
-            Jentene
-          </option>
-
+          <option value="">Ingen endring</option>
+          <option value="Frid">Frid</option>
+          <option value="Hermine">Hermine</option>
+          <option value="Malin">Malin</option>
+          <option value="Jentene">Jentene</option>
+          <option value="Ingen">Ingen</option>
         </select>
 
       </div>
@@ -1010,12 +819,33 @@
     </div>
 
 
-    <div class="modal-note">
+    <div class="pin-wrap">
 
-      🔒 Byttefunksjonen kobles til Google Sheet
-      med PIN-kode i neste versjon.
+      <div class="pin-label">
+        PIN-kode
+      </div>
+
+      <input
+        id="pin"
+        class="pin-input"
+        type="password"
+        inputmode="numeric"
+        maxlength="4"
+        autocomplete="off"
+        placeholder="••••"
+      >
+
+      <div class="pin-help">
+        Bruk den felles firesifrede koden.
+      </div>
 
     </div>
+
+
+    <div
+      class="modal-message"
+      id="modalMessage"
+    ></div>
 
 
     <div class="modal-actions">
@@ -1029,7 +859,7 @@
 
       <button
         class="btn btn-save"
-        disabled
+        id="saveButton"
       >
         Lagre endringer
       </button>
@@ -1041,31 +871,14 @@
 </div>
 
 
-
 <script>
-
-/*
-=====================================================
- GOOGLE APPS SCRIPT
-=====================================================
-*/
 
 const API_URL =
   "https://script.google.com/macros/s/AKfycbwDt3kSwSWaCwUMdbKvVD_YdWkyPOj20YNZhv47SPs8MSJyYu6-I9k7NiWkizwEvZMA/exec";
 
-
-/*
-=====================================================
- VARIABLES
-=====================================================
-*/
-
 let rides = [];
-
 let currentMode = "2";
-
 let selectedRideId = null;
-
 
 const scheduleEl =
   document.getElementById("schedule");
@@ -1088,12 +901,15 @@ const newTo =
 const newFrom =
   document.getElementById("newFrom");
 
+const pin =
+  document.getElementById("pin");
 
-/*
-=====================================================
- LOAD GOOGLE SHEET
-=====================================================
-*/
+const modalMessage =
+  document.getElementById("modalMessage");
+
+const saveButton =
+  document.getElementById("saveButton");
+
 
 async function loadSchedule() {
 
@@ -1107,24 +923,16 @@ async function loadSchedule() {
         }
       );
 
-
     if (!response.ok) {
-      throw new Error(
-        "Kunne ikke hente data."
-      );
+      throw new Error("Kunne ikke hente data.");
     }
-
 
     const data =
       await response.json();
 
-
     if (!Array.isArray(data)) {
-      throw new Error(
-        "Ugyldig dataformat."
-      );
+      throw new Error("Ugyldig dataformat.");
     }
-
 
     rides = data
       .filter(
@@ -1138,7 +946,6 @@ async function loadSchedule() {
           parseDate(b.date)
       );
 
-
     renderSchedule();
 
   }
@@ -1146,7 +953,6 @@ async function loadSchedule() {
   catch (error) {
 
     console.error(error);
-
 
     scheduleEl.innerHTML = `
 
@@ -1161,7 +967,6 @@ async function loadSchedule() {
         Prøv å laste siden på nytt.
 
       </div>
-
     `;
 
   }
@@ -1169,19 +974,12 @@ async function loadSchedule() {
 }
 
 
-/*
-=====================================================
- DATE FUNCTIONS
-=====================================================
-*/
-
 function parseDate(dateString) {
 
   const parts =
     dateString
       .split("-")
       .map(Number);
-
 
   return new Date(
     parts[0],
@@ -1196,7 +994,6 @@ function formatDate(dateString) {
 
   const date =
     parseDate(dateString);
-
 
   return new Intl.DateTimeFormat(
     "no-NO",
@@ -1215,7 +1012,6 @@ function getDateParts(dateString) {
   const date =
     parseDate(dateString);
 
-
   const weekday =
     new Intl.DateTimeFormat(
       "no-NO",
@@ -1226,7 +1022,6 @@ function getDateParts(dateString) {
     .format(date)
     .replace(".", "")
     .toUpperCase();
-
 
   const month =
     new Intl.DateTimeFormat(
@@ -1239,21 +1034,14 @@ function getDateParts(dateString) {
     .replace(".", "")
     .toUpperCase();
 
-
   return {
-    weekday: weekday,
+    weekday,
     day: date.getDate(),
-    month: month
+    month
   };
 
 }
 
-
-/*
-=====================================================
- PAST / TODAY
-=====================================================
-*/
 
 function isPastRide(dateString) {
 
@@ -1264,7 +1052,6 @@ function isPastRide(dateString) {
     0,0,0,0
   );
 
-
   const today =
     new Date();
 
@@ -1272,17 +1059,10 @@ function isPastRide(dateString) {
     0,0,0,0
   );
 
-
   return rideDate < today;
 
 }
 
-
-/*
-=====================================================
- TRANSPORT
-=====================================================
-*/
 
 function transportIcon(person) {
 
@@ -1290,16 +1070,13 @@ function transportIcon(person) {
     return "–";
   }
 
-
   if (person === "Jentene") {
     return "🚋";
   }
 
-
   if (person === "Ingen") {
     return "–";
   }
-
 
   return "🚗";
 
@@ -1317,12 +1094,6 @@ function displayPerson(person) {
 }
 
 
-/*
-=====================================================
- CURRENT WEEK
-=====================================================
-*/
-
 function getCurrentScheduleWeek() {
 
   const today =
@@ -1332,20 +1103,12 @@ function getCurrentScheduleWeek() {
     0,0,0,0
   );
 
-
-  /*
-    Finn uke ved å se hvilken
-    mandag–søndag-periode dagens
-    dato ligger i.
-  */
-
   const weeks =
     [...new Set(
       rides.map(
         ride => ride.week
       )
     )];
-
 
   for (const week of weeks) {
 
@@ -1355,11 +1118,9 @@ function getCurrentScheduleWeek() {
           ride.week === week
       );
 
-
     if (!weekRides.length) {
       continue;
     }
-
 
     const dates =
       weekRides
@@ -1371,19 +1132,8 @@ function getCurrentScheduleWeek() {
           (a,b) => a-b
         );
 
-
     const firstDate =
       new Date(dates[0]);
-
-    const lastDate =
-      new Date(
-        dates[dates.length - 1]
-      );
-
-
-    /*
-      Utvid til mandag–søndag.
-    */
 
     const monday =
       new Date(firstDate);
@@ -1404,7 +1154,6 @@ function getCurrentScheduleWeek() {
       0,0,0,0
     );
 
-
     const sunday =
       new Date(monday);
 
@@ -1416,23 +1165,14 @@ function getCurrentScheduleWeek() {
       23,59,59,999
     );
 
-
     if (
       today >= monday &&
       today <= sunday
     ) {
-
       return week;
-
     }
 
   }
-
-
-  /*
-    Hvis vi er før eller mellom
-    planlagte uker:
-  */
 
   const futureRide =
     rides.find(
@@ -1440,11 +1180,9 @@ function getCurrentScheduleWeek() {
         parseDate(ride.date) >= today
     );
 
-
   if (futureRide) {
     return futureRide.week;
   }
-
 
   return rides.length
     ? rides[rides.length - 1].week
@@ -1453,35 +1191,23 @@ function getCurrentScheduleWeek() {
 }
 
 
-/*
-=====================================================
- RENDER
-=====================================================
-*/
-
 function renderSchedule() {
 
   scheduleEl.innerHTML = "";
 
-
   if (!rides.length) {
 
     scheduleEl.innerHTML = `
-
       <div class="status">
         Ingen treninger funnet.
       </div>
-
     `;
 
     return;
-
   }
-
 
   const currentWeek =
     getCurrentScheduleWeek();
-
 
   const allWeeks =
     [...new Set(
@@ -1490,9 +1216,7 @@ function renderSchedule() {
       )
     )];
 
-
   let visibleWeeks = [];
-
 
   if (currentMode === "all") {
 
@@ -1509,7 +1233,6 @@ function renderSchedule() {
     const count =
       Number(currentMode);
 
-
     visibleWeeks =
       allWeeks
         .filter(
@@ -1523,7 +1246,6 @@ function renderSchedule() {
 
   }
 
-
   visibleWeeks.forEach(
     week => {
 
@@ -1533,11 +1255,9 @@ function renderSchedule() {
             ride.week === week
         );
 
-
       if (!weekRides.length) {
         return;
       }
-
 
       const allHoliday =
         weekRides.every(
@@ -1545,7 +1265,6 @@ function renderSchedule() {
             ride.to === "Ingen" &&
             ride.from === "Ingen"
         );
-
 
       if (allHoliday) {
 
@@ -1555,33 +1274,26 @@ function renderSchedule() {
         );
 
         return;
-
       }
-
 
       const section =
         document.createElement(
           "section"
         );
 
-
       section.className =
         "week-section";
-
 
       const title =
         document.createElement(
           "div"
         );
 
-
       title.className =
         "week-title";
 
-
       let titleText =
         `Uke ${week}`;
-
 
       if (week === currentWeek) {
 
@@ -1602,7 +1314,6 @@ function renderSchedule() {
             week
           );
 
-
         if (
           thisIndex ===
           currentIndex + 1
@@ -1615,42 +1326,24 @@ function renderSchedule() {
 
       }
 
-
       title.innerHTML = `
-
-        <span>
-          📅
-        </span>
-
-        <span>
-          ${titleText}
-        </span>
-
+        <span>📅</span>
+        <span>${titleText}</span>
       `;
-
 
       section.appendChild(
         title
       );
 
-
       weekRides.forEach(
         ride => {
-
-          /*
-            Dersom en enkelt rad
-            står som Ingen.
-          */
 
           if (
             ride.to === "Ingen" &&
             ride.from === "Ingen"
           ) {
-
             return;
-
           }
-
 
           section.appendChild(
             createRideCard(
@@ -1662,7 +1355,6 @@ function renderSchedule() {
         }
       );
 
-
       scheduleEl.appendChild(
         section
       );
@@ -1670,38 +1362,29 @@ function renderSchedule() {
     }
   );
 
-
   const footer =
     document.createElement(
       "div"
     );
 
-
   footer.className =
     "footer-card";
 
-
   footer.innerHTML = `
-
     <div class="footer-icon">
       🚗
     </div>
 
     <div>
-
       <div class="footer-title">
         Husk samkjøring
       </div>
 
       <div class="footer-text">
-        Avtal bytte direkte,
-        og oppdater deretter kjørelisten.
+        Avtal bytte direkte, og oppdater deretter kjørelisten.
       </div>
-
     </div>
-
   `;
-
 
   scheduleEl.appendChild(
     footer
@@ -1709,12 +1392,6 @@ function renderSchedule() {
 
 }
 
-
-/*
-=====================================================
- RIDE CARD
-=====================================================
-*/
 
 function createRideCard(
   ride,
@@ -1726,18 +1403,15 @@ function createRideCard(
       ride.date
     );
 
-
   const past =
     isPastRide(
       ride.date
     );
 
-
   const card =
     document.createElement(
       "div"
     );
-
 
   card.className =
     "ride-card" +
@@ -1747,7 +1421,6 @@ function createRideCard(
     (past
       ? " past"
       : "");
-
 
   card.innerHTML = `
 
@@ -1771,28 +1444,13 @@ function createRideCard(
     <div class="details">
 
       <div class="detail-row">
-
-        <div class="detail-icon">
-          🕒
-        </div>
-
-        <div>
-          ${ride.time || "–"}
-        </div>
-
+        <div class="detail-icon">🕒</div>
+        <div>${ride.time || "–"}</div>
       </div>
 
-
       <div class="detail-row">
-
-        <div class="detail-icon">
-          📍
-        </div>
-
-        <div>
-          ${ride.place || "–"}
-        </div>
-
+        <div class="detail-icon">📍</div>
+        <div>${ride.place || "–"}</div>
       </div>
 
     </div>
@@ -1803,7 +1461,6 @@ function createRideCard(
       <div class="assignment-label">
         Til trening
       </div>
-
 
       <div class="assignment-person">
 
@@ -1825,7 +1482,6 @@ function createRideCard(
       <div class="assignment-label">
         Hente
       </div>
-
 
       <div class="assignment-person">
 
@@ -1857,9 +1513,7 @@ function createRideCard(
         : "Bytte"}
 
     </button>
-
   `;
-
 
   if (!past) {
 
@@ -1877,17 +1531,9 @@ function createRideCard(
 
   }
 
-
   return card;
-
 }
 
-
-/*
-=====================================================
- HOLIDAY
-=====================================================
-*/
 
 function renderHoliday(
   week,
@@ -1899,16 +1545,13 @@ function renderHoliday(
       "div"
     );
 
-
   holiday.className =
     "holiday";
-
 
   const first =
     getDateParts(
       weekRides[0].date
     );
-
 
   const last =
     getDateParts(
@@ -1916,7 +1559,6 @@ function renderHoliday(
         weekRides.length - 1
       ].date
     );
-
 
   holiday.innerHTML = `
 
@@ -1937,9 +1579,7 @@ function renderHoliday(
       </div>
 
     </div>
-
   `;
-
 
   scheduleEl.appendChild(
     holiday
@@ -1948,17 +1588,10 @@ function renderHoliday(
 }
 
 
-/*
-=====================================================
- MODAL
-=====================================================
-*/
-
 function openModal(rideId) {
 
   selectedRideId =
     rideId;
-
 
   const ride =
     rides.find(
@@ -1967,31 +1600,31 @@ function openModal(rideId) {
         String(rideId)
     );
 
-
   if (!ride) {
     return;
   }
-
 
   modalDate.textContent =
     `${formatDate(ride.date)} · ` +
     `${ride.time} · ` +
     `${ride.place}`;
 
-
   currentTo.innerHTML =
     `${transportIcon(ride.to)} ` +
     `${displayPerson(ride.to)}`;
-
 
   currentFrom.innerHTML =
     `${transportIcon(ride.from)} ` +
     `${displayPerson(ride.from)}`;
 
-
   newTo.value = "";
   newFrom.value = "";
+  pin.value = "";
 
+  clearModalMessage();
+
+  saveButton.disabled = false;
+  saveButton.textContent = "Lagre endringer";
 
   backdrop
     .classList
@@ -2006,8 +1639,166 @@ function closeModal() {
     .classList
     .remove("show");
 
-
   selectedRideId = null;
+
+  clearModalMessage();
+
+}
+
+
+async function saveChanges() {
+
+  const ride =
+    rides.find(
+      item =>
+        String(item.id) ===
+        String(selectedRideId)
+    );
+
+  if (!ride) {
+    return;
+  }
+
+  const selectedTo =
+    newTo.value;
+
+  const selectedFrom =
+    newFrom.value;
+
+  const enteredPin =
+    pin.value.trim();
+
+  if (
+    !selectedTo &&
+    !selectedFrom
+  ) {
+
+    showModalMessage(
+      "Velg minst én endring.",
+      "error"
+    );
+
+    return;
+  }
+
+  if (
+    !/^\d{4}$/.test(
+      enteredPin
+    )
+  ) {
+
+    showModalMessage(
+      "Skriv inn en firesifret PIN-kode.",
+      "error"
+    );
+
+    return;
+  }
+
+  saveButton.disabled = true;
+  saveButton.textContent = "Lagrer...";
+
+  clearModalMessage();
+
+  try {
+
+    const response =
+      await fetch(
+        API_URL,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body: JSON.stringify({
+            id: ride.id,
+            pin: enteredPin,
+            to: selectedTo,
+            from: selectedFrom
+          })
+        }
+      );
+
+    if (!response.ok) {
+      throw new Error(
+        "Kunne ikke lagre endringen."
+      );
+    }
+
+    const result =
+      await response.json();
+
+    if (!result.success) {
+
+      showModalMessage(
+        result.message ||
+        "Endringen kunne ikke lagres.",
+        "error"
+      );
+
+      saveButton.disabled = false;
+      saveButton.textContent =
+        "Lagre endringer";
+
+      return;
+    }
+
+    showModalMessage(
+      "✓ Kjørelisten er oppdatert.",
+      "success"
+    );
+
+    await loadSchedule();
+
+    setTimeout(
+      closeModal,
+      700
+    );
+
+  }
+
+  catch (error) {
+
+    console.error(error);
+
+    showModalMessage(
+      "Kunne ikke lagre. Prøv igjen.",
+      "error"
+    );
+
+    saveButton.disabled = false;
+    saveButton.textContent =
+      "Lagre endringer";
+
+  }
+
+}
+
+
+function showModalMessage(
+  text,
+  type
+) {
+
+  modalMessage.className =
+    `modal-message ${type}`;
+
+  modalMessage.textContent =
+    text;
+
+}
+
+
+function clearModalMessage() {
+
+  modalMessage.className =
+    "modal-message";
+
+  modalMessage.textContent =
+    "";
 
 }
 
@@ -2032,6 +1823,16 @@ document
   );
 
 
+document
+  .getElementById(
+    "saveButton"
+  )
+  .addEventListener(
+    "click",
+    saveChanges
+  );
+
+
 backdrop.addEventListener(
   "click",
   event => {
@@ -2040,9 +1841,7 @@ backdrop.addEventListener(
       event.target ===
       backdrop
     ) {
-
       closeModal();
-
     }
 
   }
@@ -2054,23 +1853,14 @@ document.addEventListener(
   event => {
 
     if (
-      event.key ===
-      "Escape"
+      event.key === "Escape"
     ) {
-
       closeModal();
-
     }
 
   }
 );
 
-
-/*
-=====================================================
- TABS
-=====================================================
-*/
 
 document
   .querySelectorAll(
@@ -2096,17 +1886,14 @@ document
                   )
             );
 
-
           tab
             .classList
             .add(
               "active"
             );
 
-
           currentMode =
             tab.dataset.mode;
-
 
           renderSchedule();
 
@@ -2116,12 +1903,6 @@ document
     }
   );
 
-
-/*
-=====================================================
- START
-=====================================================
-*/
 
 loadSchedule();
 
