@@ -18,20 +18,16 @@
       --green-soft: #e8f6ee;
       --blue: #2266b0;
       --blue-soft: #edf4fb;
-
       --text: #172033;
       --muted: #6e7785;
       --border: #dfe5eb;
       --background: #f3f6f9;
       --card: #ffffff;
-
       --past-bg: #f1f3f5;
       --past-date: #e2e5e8;
       --past-text: #7a818a;
-
       --red: #c94141;
       --red-soft: #fff0f0;
-
       --shadow: 0 4px 14px rgba(0,0,0,.055);
     }
 
@@ -44,7 +40,6 @@
         Roboto,
         Arial,
         sans-serif;
-
       background: var(--background);
       color: var(--text);
     }
@@ -69,7 +64,6 @@
         var(--navy),
         #061a2e
       );
-
       color: white;
       padding: 22px 18px 20px;
     }
@@ -83,15 +77,11 @@
     .logo {
       width: 54px;
       height: 54px;
-
       border-radius: 50%;
       border: 3px solid #f5c945;
-
       color: #f5c945;
-
       display: grid;
       place-items: center;
-
       font-size: 27px;
       flex-shrink: 0;
     }
@@ -119,7 +109,6 @@
     .tabs {
       display: grid;
       grid-template-columns: 1.25fr 1fr 1fr;
-
       border: 1px solid var(--border);
       border-radius: 14px;
       overflow: hidden;
@@ -128,15 +117,11 @@
     .tab {
       border: 0;
       border-right: 1px solid var(--border);
-
       background: white;
       color: #344055;
-
       padding: 13px 8px;
-
       font-weight: 750;
       font-size: 14px;
-
       cursor: pointer;
     }
 
@@ -161,49 +146,36 @@
       display: flex;
       align-items: center;
       gap: 9px;
-
       margin-bottom: 10px;
-
       font-size: 21px;
       font-weight: 850;
     }
 
     .ride-card {
       display: grid;
-
       grid-template-columns:
         86px
         minmax(0,1fr)
         145px
         145px
         86px;
-
       gap: 10px;
       align-items: center;
-
       padding: 10px;
       margin-bottom: 10px;
-
       background: var(--card);
-
       border: 1px solid var(--border);
       border-radius: 14px;
-
       box-shadow: var(--shadow);
     }
 
     .date-box {
       border-radius: 11px;
-
       padding: 7px 6px;
-
       text-align: center;
-
       background: var(--green-soft);
       color: #147743;
-
       min-height: 88px;
-
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -389,6 +361,12 @@
     .status-icon {
       font-size: 32px;
       margin-bottom: 8px;
+    }
+
+    .sync-note {
+      margin-top: 7px;
+      font-size: 11px;
+      color: #8b929b;
     }
 
     .error-box {
@@ -712,6 +690,7 @@
     </div>
   </header>
 
+
   <div class="toolbar">
 
     <div class="tabs">
@@ -731,6 +710,7 @@
     </div>
 
   </div>
+
 
   <main class="content" id="schedule">
 
@@ -876,6 +856,9 @@
 const API_URL =
   "https://script.google.com/macros/s/AKfycbwDt3kSwSWaCwUMdbKvVD_YdWkyPOj20YNZhv47SPs8MSJyYu6-I9k7NiWkizwEvZMA/exec";
 
+const STORAGE_KEY =
+  "handball_schedule_cache";
+
 let rides = [];
 let currentMode = "2";
 let selectedRideId = null;
@@ -911,40 +894,103 @@ const saveButton =
   document.getElementById("saveButton");
 
 
-async function loadSchedule() {
+async function loadSchedule(showCachedFirst = true) {
+
+  if (showCachedFirst) {
+
+    try {
+
+      const cached =
+        localStorage.getItem(
+          STORAGE_KEY
+        );
+
+      if (cached) {
+
+        const cachedData =
+          JSON.parse(cached);
+
+        if (
+          Array.isArray(cachedData) &&
+          cachedData.length
+        ) {
+
+          rides =
+            cachedData;
+
+          renderSchedule();
+
+        }
+
+      }
+
+    }
+
+    catch (error) {
+
+      console.log(
+        "Kunne ikke lese lokal cache."
+      );
+
+    }
+
+  }
+
 
   try {
 
     const response =
       await fetch(
-        API_URL + "?t=" + Date.now(),
+        API_URL,
         {
-          cache: "no-store"
+          cache: "no-cache"
         }
       );
 
     if (!response.ok) {
-      throw new Error("Kunne ikke hente data.");
+      throw new Error(
+        "Kunne ikke hente data."
+      );
     }
 
     const data =
       await response.json();
 
     if (!Array.isArray(data)) {
-      throw new Error("Ugyldig dataformat.");
+      throw new Error(
+        "Ugyldig dataformat."
+      );
     }
 
-    rides = data
-      .filter(
-        ride =>
-          ride.date &&
-          ride.week
-      )
-      .sort(
-        (a,b) =>
-          parseDate(a.date) -
-          parseDate(b.date)
+    rides =
+      data
+        .filter(
+          ride =>
+            ride.date &&
+            ride.week
+        )
+        .sort(
+          (a,b) =>
+            parseDate(a.date) -
+            parseDate(b.date)
+        );
+
+    try {
+
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(rides)
       );
+
+    }
+
+    catch (error) {
+
+      console.log(
+        "Kunne ikke lagre lokal cache."
+      );
+
+    }
 
     renderSchedule();
 
@@ -954,20 +1000,24 @@ async function loadSchedule() {
 
     console.error(error);
 
-    scheduleEl.innerHTML = `
+    if (!rides.length) {
 
-      <div class="error-box">
+      scheduleEl.innerHTML = `
 
-        <strong>
-          Kunne ikke hente kjøreliste.
-        </strong>
+        <div class="error-box">
 
-        <br><br>
+          <strong>
+            Kunne ikke hente kjøreliste.
+          </strong>
 
-        Prøv å laste siden på nytt.
+          <br><br>
 
-      </div>
-    `;
+          Prøv å laste siden på nytt.
+
+        </div>
+      `;
+
+    }
 
   }
 
@@ -1624,7 +1674,8 @@ function openModal(rideId) {
   clearModalMessage();
 
   saveButton.disabled = false;
-  saveButton.textContent = "Lagre endringer";
+  saveButton.textContent =
+    "Lagre endringer";
 
   backdrop
     .classList
@@ -1642,6 +1693,54 @@ function closeModal() {
   selectedRideId = null;
 
   clearModalMessage();
+
+}
+
+
+function wait(ms) {
+
+  return new Promise(
+    resolve =>
+      setTimeout(
+        resolve,
+        ms
+      )
+  );
+
+}
+
+
+async function postChange(
+  payload
+) {
+
+  const response =
+    await fetch(
+      API_URL,
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type":
+            "text/plain;charset=utf-8"
+        },
+
+        body:
+          JSON.stringify(
+            payload
+          )
+      }
+    );
+
+  if (!response.ok) {
+
+    throw new Error(
+      "HTTP-feil ved lagring."
+    );
+
+  }
+
+  return await response.json();
 
 }
 
@@ -1696,40 +1795,43 @@ async function saveChanges() {
   }
 
   saveButton.disabled = true;
-  saveButton.textContent = "Lagrer...";
+  saveButton.textContent =
+    "Lagrer...";
 
   clearModalMessage();
 
+  const payload = {
+    id: ride.id,
+    pin: enteredPin,
+    to: selectedTo,
+    from: selectedFrom
+  };
+
   try {
 
-    const response =
-      await fetch(
-        API_URL,
-        {
-          method: "POST",
+    let result;
 
-          headers: {
-            "Content-Type":
-              "text/plain;charset=utf-8"
-          },
+    try {
 
-          body: JSON.stringify({
-            id: ride.id,
-            pin: enteredPin,
-            to: selectedTo,
-            from: selectedFrom
-          })
-        }
-      );
+      result =
+        await postChange(
+          payload
+        );
 
-    if (!response.ok) {
-      throw new Error(
-        "Kunne ikke lagre endringen."
-      );
     }
 
-    const result =
-      await response.json();
+    catch (firstError) {
+
+      await wait(
+        1200
+      );
+
+      result =
+        await postChange(
+          payload
+        );
+
+    }
 
     if (!result.success) {
 
@@ -1746,12 +1848,35 @@ async function saveChanges() {
       return;
     }
 
+    if (selectedTo) {
+      ride.to =
+        selectedTo;
+    }
+
+    if (selectedFrom) {
+      ride.from =
+        selectedFrom;
+    }
+
+    try {
+
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(rides)
+      );
+
+    }
+
+    catch (error) {}
+
+    renderSchedule();
+
     showModalMessage(
       "✓ Kjørelisten er oppdatert.",
       "success"
     );
 
-    await loadSchedule();
+    loadSchedule(false);
 
     setTimeout(
       closeModal,
@@ -1904,7 +2029,7 @@ document
   );
 
 
-loadSchedule();
+loadSchedule(true);
 
 </script>
 
