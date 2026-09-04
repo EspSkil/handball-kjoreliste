@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#082742">
+<meta name="theme-color" content="#ffffff">
 
 <title>Kjøreliste håndball</title>
 
@@ -23,31 +23,27 @@
   --blue: #2266b0;
   --blue-soft: #edf4fb;
 
-  --yellow: #f5c945;
-
   --text: #172033;
   --muted: #6e7785;
 
   --border: #dfe5eb;
-  --background: #f3f6f9;
+  --background: #f5f7f9;
   --card: #ffffff;
 
   --past-bg: #f1f3f5;
   --past-date: #e2e5e8;
   --past-text: #8a9097;
 
-  --red: #c94141;
   --red-soft: #fff0f0;
 
   --orange: #a96700;
   --orange-soft: #fff5df;
 
-  --shadow: 0 4px 14px rgba(0,0,0,.055);
+  --shadow: 0 3px 10px rgba(0,0,0,.045);
 }
 
 body {
   margin: 0;
-
   font-family:
     -apple-system,
     BlinkMacSystemFont,
@@ -73,13 +69,8 @@ button {
 .app {
   max-width: 820px;
   margin: 0 auto;
-
   min-height: 100vh;
-
   background: white;
-
-  box-shadow:
-    0 0 30px rgba(0,0,0,.04);
 }
 
 
@@ -88,30 +79,24 @@ button {
 ===================================================== */
 
 .header {
-  background:
-    linear-gradient(
-      135deg,
-      var(--navy),
-      #061a2e
-    );
+  background: white;
+  color: var(--navy);
 
-  color: white;
+  padding: 13px 16px 12px;
 
-  padding:
-    18px 18px
-    17px;
+  border-top: 5px solid var(--navy);
+  border-bottom: 2px solid var(--navy);
 }
 
 .header-row {
   display: flex;
   align-items: center;
-
-  gap: 15px;
+  gap: 13px;
 }
 
 .club-logo {
-  width: 62px;
-  height: 62px;
+  width: 56px;
+  height: 56px;
 
   object-fit: contain;
 
@@ -121,15 +106,18 @@ button {
 .header h1 {
   margin: 0;
 
-  font-size: 27px;
+  font-size: 25px;
   line-height: 1.05;
+
+  color: var(--navy);
 }
 
 .season {
-  margin-top: 5px;
+  margin-top: 4px;
 
-  font-size: 17px;
-  opacity: .87;
+  font-size: 16px;
+
+  color: #596675;
 }
 
 
@@ -138,32 +126,28 @@ button {
 ===================================================== */
 
 .main-navigation {
-  padding:
-    14px 14px
-    5px;
-
-  background: white;
+  padding: 11px 10px 5px;
 
   display: grid;
-  grid-template-columns:
-    1fr 1fr;
+  grid-template-columns: 1fr 1fr;
 
   gap: 8px;
+
+  background: white;
 }
 
 .main-nav-button {
-  border:
-    1px solid var(--border);
+  border: 1px solid var(--border);
 
   border-radius: 13px;
 
-  padding:
-    12px 10px;
+  padding: 10px 8px;
 
   background: white;
 
   color: #344055;
 
+  font-size: 15px;
   font-weight: 850;
 
   cursor: pointer;
@@ -172,7 +156,6 @@ button {
 .main-nav-button.active {
   background: var(--navy);
   border-color: var(--navy);
-
   color: white;
 }
 
@@ -182,9 +165,7 @@ button {
 ===================================================== */
 
 .toolbar {
-  padding:
-    8px 14px
-    6px;
+  padding: 6px 10px 3px;
 
   background: white;
 
@@ -206,29 +187,24 @@ button {
     1fr
     1fr;
 
-  border:
-    1px solid var(--border);
+  border: 1px solid var(--border);
 
-  border-radius: 14px;
+  border-radius: 13px;
 
   overflow: hidden;
 }
 
 .tab {
   border: 0;
-
-  border-right:
-    1px solid var(--border);
+  border-right: 1px solid var(--border);
 
   background: white;
-
   color: #344055;
 
-  padding:
-    13px 8px;
+  padding: 10px 5px;
 
+  font-size: 13px;
   font-weight: 750;
-  font-size: 14px;
 
   cursor: pointer;
 }
@@ -248,26 +224,23 @@ button {
 ===================================================== */
 
 .content {
-  padding:
-    8px 14px
-    35px;
+  padding: 5px 10px 25px;
 }
 
 .week-section {
-  margin-top: 22px;
+  margin-top: 14px;
 }
 
 
 /* =====================================================
-   NEUTRAL CALENDAR ICON
+   CALENDAR ICON
 ===================================================== */
 
 .calendar-icon {
-  width: 27px;
-  height: 27px;
+  width: 23px;
+  height: 23px;
 
-  border:
-    2px solid #8b95a2;
+  border: 2px solid #8994a2;
 
   border-radius: 5px;
 
@@ -283,11 +256,11 @@ button {
 
   left: -2px;
   right: -2px;
-  top: 6px;
+  top: 5px;
 
-  height: 5px;
+  height: 4px;
 
-  background: #8b95a2;
+  background: #8994a2;
 }
 
 .calendar-icon::after {
@@ -295,18 +268,17 @@ button {
 
   position: absolute;
 
-  width: 4px;
-  height: 4px;
+  width: 3px;
+  height: 3px;
 
   border-radius: 50%;
 
-  background: #8b95a2;
+  background: #8994a2;
 
   left: 5px;
-  bottom: 5px;
+  bottom: 4px;
 
-  box-shadow:
-    8px 0 #8b95a2;
+  box-shadow: 7px 0 #8994a2;
 }
 
 
@@ -318,11 +290,11 @@ button {
   display: flex;
   align-items: center;
 
-  gap: 10px;
+  gap: 8px;
 
-  margin-bottom: 10px;
+  margin-bottom: 7px;
 
-  font-size: 21px;
+  font-size: 19px;
   font-weight: 850;
 }
 
@@ -335,30 +307,27 @@ button {
   display: grid;
 
   grid-template-columns:
-    86px
+    70px
     minmax(0,1fr)
-    145px
-    145px
-    86px;
+    118px
+    118px
+    72px;
 
-  gap: 10px;
+  gap: 8px;
 
   align-items: center;
 
-  padding: 10px;
+  padding: 7px;
 
-  margin-bottom: 10px;
+  margin-bottom: 7px;
 
-  background:
-    var(--card);
+  background: var(--card);
 
-  border:
-    1px solid var(--border);
+  border: 1px solid var(--border);
 
-  border-radius: 14px;
+  border-radius: 13px;
 
-  box-shadow:
-    var(--shadow);
+  box-shadow: var(--shadow);
 }
 
 
@@ -367,59 +336,43 @@ button {
 ===================================================== */
 
 .date-box {
-  border-radius: 11px;
+  border-radius: 10px;
 
-  padding:
-    7px 6px;
+  padding: 5px;
 
   text-align: center;
 
-  background:
-    var(--green-soft);
+  background: var(--green-soft);
+  color: #147743;
 
-  color:
-    #147743;
-
-  min-height: 88px;
+  min-height: 72px;
 
   display: flex;
-
   flex-direction: column;
-
   justify-content: center;
 }
 
 .ride-card.next-week .date-box {
-  background:
-    var(--blue-soft);
-
-  color:
-    #245c99;
+  background: var(--blue-soft);
+  color: #245c99;
 }
 
 .date-day {
-  font-size: 12px;
-
+  font-size: 10px;
   font-weight: 850;
-
-  text-transform:
-    uppercase;
+  text-transform: uppercase;
 }
 
 .date-number {
-  font-size: 30px;
-
+  font-size: 26px;
   font-weight: 900;
-
   line-height: 1;
 
-  margin:
-    3px 0;
+  margin: 2px 0;
 }
 
 .date-month {
-  font-size: 12px;
-
+  font-size: 10px;
   font-weight: 750;
 }
 
@@ -434,19 +387,17 @@ button {
 
 .detail-row {
   display: flex;
-
   align-items: center;
 
-  gap: 8px;
+  gap: 6px;
 
-  margin:
-    5px 0;
+  margin: 2px 0;
 
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .detail-icon {
-  width: 20px;
+  width: 18px;
 
   text-align: center;
 
@@ -455,24 +406,22 @@ button {
 
 .venue-row {
   display: flex;
-
   align-items: center;
 
-  gap: 9px;
+  gap: 6px;
 }
 
 .venue-image {
-  width: 82px;
-  height: 48px;
-
-  border-radius: 7px;
+  width: 58px;
+  height: 34px;
 
   object-fit: cover;
 
+  border-radius: 6px;
+
   margin-left: auto;
 
-  border:
-    1px solid #d9dee4;
+  border: 1px solid #d9dee4;
 }
 
 
@@ -483,50 +432,43 @@ button {
 .assignment {
   min-width: 0;
 
-  border-left:
-    1px solid var(--border);
+  border-left: 1px solid var(--border);
 
-  padding-left: 12px;
+  padding-left: 9px;
 }
 
 .assignment-label {
-  font-size: 11px;
+  font-size: 9px;
 
-  color:
-    var(--muted);
+  color: var(--muted);
 
   font-weight: 850;
 
-  text-transform:
-    uppercase;
+  text-transform: uppercase;
 
-  letter-spacing:
-    .35px;
-
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .assignment-person {
   display: flex;
-
   align-items: center;
 
-  gap: 7px;
+  gap: 5px;
 
-  font-size: 17px;
+  font-size: 14px;
 
   font-weight: 850;
 
-  line-height: 1.1;
+  line-height: 1.05;
 }
 
 .assignment-icon {
-  font-size: 22px;
+  font-size: 16px;
 }
 
 
 /* =====================================================
-   CHANGED BADGE
+   CHANGED
 ===================================================== */
 
 .changed-badge {
@@ -534,22 +476,19 @@ button {
 
   align-items: center;
 
-  gap: 4px;
+  gap: 3px;
 
-  margin-top: 7px;
+  margin-top: 4px;
 
-  padding:
-    4px 7px;
+  padding: 3px 6px;
 
-  border-radius: 7px;
+  border-radius: 6px;
 
-  background:
-    var(--orange-soft);
+  background: var(--orange-soft);
 
-  color:
-    var(--orange);
+  color: var(--orange);
 
-  font-size: 11px;
+  font-size: 9px;
 
   font-weight: 850;
 }
@@ -562,53 +501,47 @@ button {
 .swap-button {
   border: 0;
 
-  border-radius: 10px;
+  border-radius: 9px;
 
-  background:
-    var(--green-soft);
+  background: var(--green-soft);
 
-  color:
-    #157842;
+  color: #157842;
 
-  padding:
-    10px 7px;
+  padding: 7px 4px;
+
+  min-height: 54px;
+
+  font-size: 11px;
 
   font-weight: 850;
 
   cursor: pointer;
-
-  min-height: 64px;
 }
 
 .ride-card.next-week .swap-button {
-  background:
-    var(--blue-soft);
-
-  color:
-    var(--blue);
+  background: var(--blue-soft);
+  color: var(--blue);
 }
 
 .swap-icon {
   display: block;
 
-  font-size: 25px;
+  font-size: 20px;
 
   line-height: 1;
 
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 }
 
 
 /* =====================================================
-   PAST RIDES
+   PAST
 ===================================================== */
 
 .ride-card.past {
-  background:
-    var(--past-bg);
+  background: var(--past-bg);
 
-  color:
-    var(--past-text);
+  color: var(--past-text);
 
   box-shadow: none;
 
@@ -616,31 +549,17 @@ button {
 }
 
 .ride-card.past .date-box {
-  background:
-    var(--past-date);
-
-  color:
-    #6f767e;
+  background: var(--past-date);
+  color: #6f767e;
 }
 
 .ride-card.past .assignment-label {
-  color:
-    #8b9198;
-}
-
-.ride-card.past .assignment {
-  border-color:
-    #d5d9dd;
+  color: #8b9198;
 }
 
 .ride-card.past .swap-button {
-  background:
-    #e0e3e6;
-
-  color:
-    #9a9fa5;
-
-  cursor: default;
+  background: #e0e3e6;
+  color: #9a9fa5;
 
   pointer-events: none;
 }
@@ -651,45 +570,40 @@ button {
 ===================================================== */
 
 .holiday {
-  margin-top: 18px;
+  margin-top: 14px;
 
-  border:
-    1px solid #eda2a2;
+  border: 1px solid #eda2a2;
 
-  background:
-    var(--red-soft);
+  background: var(--red-soft);
 
-  border-radius: 14px;
+  border-radius: 12px;
 
-  padding: 15px;
+  padding: 12px;
 
-  color:
-    #a92f2f;
+  color: #a92f2f;
 
   display: flex;
 
   align-items: center;
 
-  gap: 12px;
+  gap: 10px;
 }
 
 .holiday-icon {
-  font-size: 34px;
+  font-size: 28px;
 }
 
 .holiday-title {
-  font-size: 17px;
-
+  font-size: 16px;
   font-weight: 900;
 }
 
 .holiday-text {
   margin-top: 2px;
 
-  color:
-    #4e5662;
+  color: #4e5662;
 
-  font-size: 14px;
+  font-size: 13px;
 }
 
 
@@ -698,55 +612,50 @@ button {
 ===================================================== */
 
 .footer-card {
-  margin-top: 18px;
+  margin-top: 14px;
 
-  border:
-    1px solid var(--border);
+  border: 1px solid var(--border);
 
-  border-radius: 14px;
+  border-radius: 13px;
 
   background: white;
 
-  padding: 15px;
+  padding: 11px;
 
   display: flex;
-
   align-items: center;
 
-  gap: 13px;
+  gap: 10px;
 }
 
 .footer-swap-icon {
-  width: 45px;
-  height: 45px;
+  width: 38px;
+  height: 38px;
 
   border-radius: 50%;
 
   display: grid;
-
   place-items: center;
 
   flex-shrink: 0;
 
-  background:
-    var(--navy);
-
+  background: var(--navy);
   color: white;
 
-  font-size: 25px;
+  font-size: 21px;
 }
 
 .footer-title {
   font-weight: 900;
+  font-size: 15px;
 }
 
 .footer-text {
-  color:
-    var(--muted);
+  color: var(--muted);
 
-  font-size: 13px;
+  font-size: 12px;
 
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
 
@@ -755,37 +664,31 @@ button {
 ===================================================== */
 
 .status {
-  padding:
-    35px 15px;
+  padding: 30px 15px;
 
   text-align: center;
 
-  color:
-    var(--muted);
+  color: var(--muted);
 }
 
 .status-icon {
-  font-size: 32px;
+  font-size: 28px;
 
-  margin-bottom: 8px;
+  margin-bottom: 7px;
 }
 
 .error-box {
-  margin:
-    25px 0;
+  margin: 20px 0;
 
-  padding: 18px;
+  padding: 15px;
 
   border-radius: 12px;
 
-  background:
-    #fff0f0;
+  background: #fff0f0;
 
-  color:
-    #a32d2d;
+  color: #a32d2d;
 
-  border:
-    1px solid #efb0b0;
+  border: 1px solid #efb0b0;
 }
 
 
@@ -794,18 +697,15 @@ button {
 ===================================================== */
 
 .games-heading {
-  margin-top: 20px;
-
-  margin-bottom: 11px;
+  margin-top: 14px;
+  margin-bottom: 8px;
 
   display: flex;
-
   align-items: center;
 
-  gap: 10px;
+  gap: 8px;
 
-  font-size: 22px;
-
+  font-size: 20px;
   font-weight: 900;
 }
 
@@ -813,32 +713,28 @@ button {
   display: grid;
 
   grid-template-columns:
-    78px
+    65px
     minmax(0,1fr);
 
-  gap: 13px;
+  gap: 10px;
 
-  padding: 12px;
+  padding: 9px;
 
-  margin-bottom: 11px;
+  margin-bottom: 8px;
 
   background: white;
 
-  border:
-    1px solid var(--border);
+  border: 1px solid var(--border);
 
-  border-radius: 14px;
+  border-radius: 13px;
 
-  box-shadow:
-    var(--shadow);
+  box-shadow: var(--shadow);
 }
 
 .game-card.past {
-  background:
-    var(--past-bg);
+  background: var(--past-bg);
 
-  color:
-    var(--past-text);
+  color: var(--past-text);
 
   box-shadow: none;
 
@@ -846,39 +742,32 @@ button {
 }
 
 .game-date-box {
-  background:
-    var(--blue-soft);
+  background: var(--blue-soft);
 
-  color:
-    #245c99;
+  color: #245c99;
 
-  border-radius: 11px;
+  border-radius: 10px;
 
-  min-height: 112px;
+  min-height: 100px;
 
   text-align: center;
 
   display: flex;
-
   flex-direction: column;
-
   justify-content: center;
 }
 
 .game-card.past .game-date-box {
-  background:
-    var(--past-date);
-
-  color:
-    #737980;
+  background: var(--past-date);
+  color: #737980;
 }
 
 .game-time {
-  font-size: 13px;
+  font-size: 11px;
 
   font-weight: 850;
 
-  margin-top: 5px;
+  margin-top: 4px;
 }
 
 .game-info {
@@ -886,62 +775,55 @@ button {
 }
 
 .game-teams {
-  font-size: 19px;
+  font-size: 16px;
 
   font-weight: 900;
 
-  margin-bottom: 7px;
+  margin-bottom: 5px;
 
-  line-height: 1.25;
+  line-height: 1.2;
 }
 
 .game-meta {
   display: flex;
-
   align-items: center;
 
-  gap: 7px;
+  gap: 6px;
 
-  margin:
-    5px 0;
+  margin: 3px 0;
 
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .game-venue-row {
   display: flex;
-
   align-items: center;
 
-  gap: 10px;
+  gap: 6px;
 }
 
 .game-venue-image {
-  width: 93px;
-  height: 52px;
+  width: 62px;
+  height: 37px;
 
-  border-radius: 7px;
+  border-radius: 6px;
 
   object-fit: cover;
 
   margin-left: auto;
 
-  border:
-    1px solid #d9dee4;
+  border: 1px solid #d9dee4;
 }
 
 .game-tournament {
-  margin-top: 8px;
+  margin-top: 5px;
+  padding-top: 5px;
 
-  padding-top: 7px;
+  border-top: 1px solid var(--border);
 
-  border-top:
-    1px solid var(--border);
+  font-size: 11px;
 
-  font-size: 12px;
-
-  color:
-    var(--muted);
+  color: var(--muted);
 }
 
 .map-link {
@@ -949,24 +831,21 @@ button {
 
   align-items: center;
 
-  gap: 5px;
+  gap: 4px;
 
-  margin-top: 8px;
+  margin-top: 5px;
 
-  padding:
-    7px 9px;
+  padding: 5px 7px;
 
-  border-radius: 8px;
+  border-radius: 7px;
 
   text-decoration: none;
 
-  background:
-    var(--blue-soft);
+  background: var(--blue-soft);
 
-  color:
-    var(--blue);
+  color: var(--blue);
 
-  font-size: 12px;
+  font-size: 11px;
 
   font-weight: 850;
 }
@@ -981,13 +860,11 @@ button {
 
   inset: 0;
 
-  background:
-    rgba(5,18,30,.55);
+  background: rgba(5,18,30,.55);
 
   display: none;
 
   align-items: center;
-
   justify-content: center;
 
   padding: 14px;
@@ -1000,8 +877,7 @@ button {
 }
 
 .modal {
-  width:
-    min(620px,100%);
+  width: min(620px,100%);
 
   max-height: 92vh;
 
@@ -1020,24 +896,19 @@ button {
 .modal-header {
   display: flex;
 
-  justify-content:
-    space-between;
-
-  align-items:
-    flex-start;
+  justify-content: space-between;
+  align-items: flex-start;
 
   gap: 12px;
 }
 
 .modal-title {
   font-size: 20px;
-
   font-weight: 900;
 }
 
 .modal-date {
-  color:
-    var(--muted);
+  color: var(--muted);
 
   margin-top: 3px;
 
@@ -1057,8 +928,7 @@ button {
 .change-grid {
   display: grid;
 
-  grid-template-columns:
-    1fr 1fr;
+  grid-template-columns: 1fr 1fr;
 
   gap: 14px;
 
@@ -1066,8 +936,7 @@ button {
 }
 
 .change-box {
-  border:
-    1px solid var(--border);
+  border: 1px solid var(--border);
 
   border-radius: 12px;
 
@@ -1079,18 +948,15 @@ button {
 
   font-weight: 850;
 
-  text-transform:
-    uppercase;
+  text-transform: uppercase;
 
-  color:
-    var(--muted);
+  color: var(--muted);
 
   margin-bottom: 5px;
 }
 
 .current-driver {
   font-size: 18px;
-
   font-weight: 900;
 
   margin-bottom: 10px;
@@ -1099,18 +965,15 @@ button {
 select {
   width: 100%;
 
-  border:
-    1px solid #bec7d2;
+  border: 1px solid #bec7d2;
 
   border-radius: 9px;
 
-  padding:
-    10px 11px;
+  padding: 10px 11px;
 
   background: white;
 
-  color:
-    var(--text);
+  color: var(--text);
 }
 
 .pin-wrap {
@@ -1138,8 +1001,7 @@ select {
 
   font-size: 20px;
 
-  border:
-    1px solid #aeb8c4;
+  border: 1px solid #aeb8c4;
 
   border-radius: 10px;
 
@@ -1147,8 +1009,7 @@ select {
 }
 
 .pin-help {
-  color:
-    var(--muted);
+  color: var(--muted);
 
   font-size: 12px;
 
@@ -1170,34 +1031,27 @@ select {
 .modal-message.error {
   display: block;
 
-  background:
-    #fff0f0;
+  background: #fff0f0;
 
-  color:
-    #a42d2d;
+  color: #a42d2d;
 
-  border:
-    1px solid #efb0b0;
+  border: 1px solid #efb0b0;
 }
 
 .modal-message.success {
   display: block;
 
-  background:
-    var(--green-soft);
+  background: var(--green-soft);
 
-  color:
-    #176e42;
+  color: #176e42;
 
-  border:
-    1px solid #b9e0ca;
+  border: 1px solid #b9e0ca;
 }
 
 .modal-actions {
   display: flex;
 
-  justify-content:
-    flex-end;
+  justify-content: flex-end;
 
   gap: 10px;
 
@@ -1205,47 +1059,39 @@ select {
 
   padding-top: 15px;
 
-  border-top:
-    1px solid var(--border);
+  border-top: 1px solid var(--border);
 }
 
 .btn {
   border-radius: 9px;
 
-  padding:
-    10px 16px;
+  padding: 10px 16px;
 
   font-weight: 850;
 
   cursor: pointer;
 
-  border:
-    1px solid var(--border);
+  border: 1px solid var(--border);
 }
 
 .btn-cancel {
   background: white;
 
-  color:
-    var(--text);
+  color: var(--text);
 }
 
 .btn-save {
-  background:
-    var(--green);
+  background: var(--green);
 
-  border-color:
-    var(--green);
+  border-color: var(--green);
 
   color: white;
 }
 
 .btn-save:disabled {
-  background:
-    #b9c1c9;
+  background: #b9c1c9;
 
-  border-color:
-    #b9c1c9;
+  border-color: #b9c1c9;
 
   cursor: default;
 }
@@ -1257,91 +1103,74 @@ select {
 
 @media (max-width: 720px) {
 
-  .app {
-    max-width: 100%;
-
-    box-shadow: none;
-  }
-
   .header {
-    padding:
-      15px 14px
-      14px;
+    padding: 10px 12px 9px;
   }
 
   .club-logo {
-    width: 52px;
-    height: 52px;
+    width: 48px;
+    height: 48px;
   }
 
   .header h1 {
-    font-size: 22px;
+    font-size: 21px;
   }
 
   .season {
-    font-size: 15px;
-  }
-
-  .main-navigation {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  .main-nav-button {
     font-size: 14px;
   }
 
-  .toolbar {
-    padding-left: 10px;
-    padding-right: 10px;
+  .main-navigation {
+    padding-top: 9px;
   }
 
-  .content {
-    padding-left: 10px;
-    padding-right: 10px;
+  .main-nav-button {
+    padding: 9px 5px;
+
+    font-size: 14px;
   }
 
   .tab {
-    font-size: 12px;
+    font-size: 11px;
 
-    padding:
-      12px 5px;
+    padding: 9px 4px;
   }
 
   .week-title {
-    font-size: 19px;
+    margin-top: 2px;
+
+    font-size: 18px;
   }
 
 
-  /* RIDES */
+  /* compact ride card */
 
   .ride-card {
     grid-template-columns:
-      62px
+      54px
       minmax(0,1fr)
-      62px;
+      54px;
 
     grid-template-areas:
       "date details swap"
       "date to swap"
       "date from swap";
 
-    gap:
-      7px 9px;
+    gap: 4px 7px;
 
-    padding: 8px;
+    padding: 6px;
   }
 
   .date-box {
     grid-area: date;
 
-    min-height: 110px;
+    min-height: 88px;
 
     align-self: stretch;
   }
 
   .date-number {
-    font-size: 26px;
+    font-size: 23px;
   }
 
   .details {
@@ -1359,25 +1188,23 @@ select {
   .assignment {
     border-left: 0;
 
-    border-top:
-      1px solid var(--border);
+    border-top: 1px solid var(--border);
 
-    padding:
-      6px 0 0;
+    padding: 4px 0 0;
   }
 
   .assignment-label {
-    font-size: 10px;
+    font-size: 9px;
 
-    margin-bottom: 2px;
+    margin-bottom: 1px;
   }
 
   .assignment-person {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .assignment-icon {
-    font-size: 17px;
+    font-size: 15px;
   }
 
   .swap-button {
@@ -1385,67 +1212,59 @@ select {
 
     min-height: 100%;
 
-    padding:
-      7px 4px;
+    padding: 5px 3px;
 
-    font-size: 12px;
+    font-size: 10px;
   }
 
   .swap-icon {
-    font-size: 22px;
+    font-size: 19px;
   }
 
   .detail-row {
-    font-size: 13px;
+    font-size: 12px;
 
-    margin:
-      3px 0;
+    margin: 1px 0;
   }
 
   .venue-image {
-    width: 70px;
-    height: 42px;
+    width: 55px;
+    height: 32px;
   }
 
 
-  /* GAMES */
-
-  .games-heading {
-    font-size: 20px;
-  }
+  /* games */
 
   .game-card {
     grid-template-columns:
-      66px minmax(0,1fr);
+      58px
+      minmax(0,1fr);
 
-    gap: 10px;
-
-    padding: 9px;
+    padding: 7px;
   }
 
   .game-date-box {
-    min-height: 120px;
+    min-height: 95px;
   }
 
   .game-teams {
-    font-size: 17px;
+    font-size: 15px;
   }
 
   .game-meta {
-    font-size: 13px;
+    font-size: 11px;
   }
 
   .game-venue-image {
-    width: 80px;
-    height: 47px;
+    width: 57px;
+    height: 34px;
   }
 
 
-  /* MODAL */
+  /* modal */
 
   .change-grid {
-    grid-template-columns:
-      1fr;
+    grid-template-columns: 1fr;
   }
 
   .modal-actions {
@@ -1563,10 +1382,6 @@ select {
 
 </div>
 
-
-<!-- ==================================================
-     SWAP MODAL
-================================================== -->
 
 <div
   class="modal-backdrop"
@@ -1750,142 +1565,84 @@ select {
 
 <script>
 
-/* =====================================================
-   API
-===================================================== */
-
 const API_URL =
   "https://script.google.com/macros/s/AKfycbwDt3kSwSWaCwUMdbKvVD_YdWkyPOj20YNZhv47SPs8MSJyYu6-I9k7NiWkizwEvZMA/exec";
 
-
 const STORAGE_KEY =
   "handball_all_cache_v2";
-
-
-/* =====================================================
-   VARIABLES
-===================================================== */
 
 let rides = [];
 let games = [];
 
 let currentMode = "2";
+let currentView = "rides";
+let selectedRideId = null;
 
-let currentView =
-  "rides";
-
-let selectedRideId =
-  null;
-
-
-/* =====================================================
-   ELEMENTS
-===================================================== */
 
 const content =
-  document.getElementById(
-    "content"
-  );
+  document.getElementById("content");
 
 const rideToolbar =
-  document.getElementById(
-    "rideToolbar"
-  );
+  document.getElementById("rideToolbar");
 
 const ridesNav =
-  document.getElementById(
-    "ridesNav"
-  );
+  document.getElementById("ridesNav");
 
 const gamesNav =
-  document.getElementById(
-    "gamesNav"
-  );
+  document.getElementById("gamesNav");
 
 const backdrop =
-  document.getElementById(
-    "modalBackdrop"
-  );
+  document.getElementById("modalBackdrop");
 
 const modalDate =
-  document.getElementById(
-    "modalDate"
-  );
+  document.getElementById("modalDate");
 
 const currentTo =
-  document.getElementById(
-    "currentTo"
-  );
+  document.getElementById("currentTo");
 
 const currentFrom =
-  document.getElementById(
-    "currentFrom"
-  );
+  document.getElementById("currentFrom");
 
 const newTo =
-  document.getElementById(
-    "newTo"
-  );
+  document.getElementById("newTo");
 
 const newFrom =
-  document.getElementById(
-    "newFrom"
-  );
+  document.getElementById("newFrom");
 
 const pin =
-  document.getElementById(
-    "pin"
-  );
+  document.getElementById("pin");
 
 const modalMessage =
-  document.getElementById(
-    "modalMessage"
-  );
+  document.getElementById("modalMessage");
 
 const saveButton =
-  document.getElementById(
-    "saveButton"
-  );
+  document.getElementById("saveButton");
 
 
-/* =====================================================
-   LOAD DATA
-===================================================== */
-
-async function loadAllData(
-  showCachedFirst = true
-) {
+async function loadAllData(showCachedFirst = true) {
 
   if (showCachedFirst) {
 
     try {
 
       const cached =
-        localStorage.getItem(
-          STORAGE_KEY
-        );
+        localStorage.getItem(STORAGE_KEY);
 
       if (cached) {
 
         const parsed =
-          JSON.parse(
-            cached
-          );
+          JSON.parse(cached);
 
         if (
           parsed &&
-          Array.isArray(
-            parsed.rides
-          )
+          Array.isArray(parsed.rides)
         ) {
 
           rides =
             parsed.rides;
 
           games =
-            Array.isArray(
-              parsed.games
-            )
+            Array.isArray(parsed.games)
               ? parsed.games
               : [];
 
@@ -1906,8 +1663,7 @@ async function loadAllData(
 
     const response =
       await fetch(
-        API_URL +
-        "?type=all",
+        API_URL + "?type=all",
         {
           cache: "no-cache"
         }
@@ -1915,11 +1671,7 @@ async function loadAllData(
 
 
     if (!response.ok) {
-
-      throw new Error(
-        "HTTP-feil"
-      );
-
+      throw new Error("HTTP-feil");
     }
 
 
@@ -1929,9 +1681,7 @@ async function loadAllData(
 
     if (
       !data ||
-      !Array.isArray(
-        data.rides
-      )
+      !Array.isArray(data.rides)
     ) {
 
       throw new Error(
@@ -1943,38 +1693,22 @@ async function loadAllData(
 
     rides =
       data.rides
-        .filter(
-          item =>
-            item.date
-        )
+        .filter(item => item.date)
         .sort(
           (a,b) =>
-            parseDate(
-              a.date
-            ) -
-            parseDate(
-              b.date
-            )
+            parseDate(a.date) -
+            parseDate(b.date)
         );
 
 
     games =
-      Array.isArray(
-        data.games
-      )
+      Array.isArray(data.games)
         ? data.games
-            .filter(
-              item =>
-                item.date
-            )
+            .filter(item => item.date)
             .sort(
               (a,b) =>
-                parseDate(
-                  a.date
-                ) -
-                parseDate(
-                  b.date
-                )
+                parseDate(a.date) -
+                parseDate(b.date)
             )
         : [];
 
@@ -2000,9 +1734,7 @@ async function loadAllData(
 
   catch (error) {
 
-    console.error(
-      error
-    );
+    console.error(error);
 
 
     if (
@@ -2033,21 +1765,12 @@ async function loadAllData(
 }
 
 
-/* =====================================================
-   DATE HELPERS
-===================================================== */
-
-function parseDate(
-  dateString
-) {
+function parseDate(dateString) {
 
   const parts =
-    String(
-      dateString
-    )
+    String(dateString)
       .split("-")
       .map(Number);
-
 
   return new Date(
     parts[0],
@@ -2058,41 +1781,28 @@ function parseDate(
 }
 
 
-function formatDate(
-  dateString
-) {
+function formatDate(dateString) {
 
   return new Intl
     .DateTimeFormat(
       "no-NO",
       {
-        weekday:
-          "long",
-
-        day:
-          "numeric",
-
-        month:
-          "long"
+        weekday: "long",
+        day: "numeric",
+        month: "long"
       }
     )
     .format(
-      parseDate(
-        dateString
-      )
+      parseDate(dateString)
     );
 
 }
 
 
-function getDateParts(
-  dateString
-) {
+function getDateParts(dateString) {
 
   const date =
-    parseDate(
-      dateString
-    );
+    parseDate(dateString);
 
 
   const weekday =
@@ -2100,15 +1810,11 @@ function getDateParts(
       .DateTimeFormat(
         "no-NO",
         {
-          weekday:
-            "short"
+          weekday: "short"
         }
       )
       .format(date)
-      .replace(
-        ".",
-        ""
-      )
+      .replace(".", "")
       .toUpperCase();
 
 
@@ -2117,52 +1823,35 @@ function getDateParts(
       .DateTimeFormat(
         "no-NO",
         {
-          month:
-            "short"
+          month: "short"
         }
       )
       .format(date)
-      .replace(
-        ".",
-        ""
-      )
+      .replace(".", "")
       .toUpperCase();
 
 
   return {
-
     weekday,
-
-    day:
-      date.getDate(),
-
+    day: date.getDate(),
     month
-
   };
 
 }
 
 
-function isPast(
-  dateString
-) {
+function isPast(dateString) {
 
   const target =
-    parseDate(
-      dateString
-    );
+    parseDate(dateString);
 
-  target.setHours(
-    0,0,0,0
-  );
+  target.setHours(0,0,0,0);
 
 
   const today =
     new Date();
 
-  today.setHours(
-    0,0,0,0
-  );
+  today.setHours(0,0,0,0);
 
 
   return target < today;
@@ -2170,42 +1859,27 @@ function isPast(
 }
 
 
-/* =====================================================
-   IMAGES
-===================================================== */
-
-function getVenueImage(
-  venue
-) {
+function getVenueImage(venue) {
 
   const text =
-    String(
-      venue || ""
-    ).toLowerCase();
+    String(venue || "")
+      .toLowerCase();
 
 
   if (
-    text.includes(
-      "nadderud"
-    )
+    text.includes("nadderud")
   ) {
 
-    return (
-      "assets/NA.jpg"
-    );
+    return "assets/NA.jpg";
 
   }
 
 
   if (
-    text.includes(
-      "haslum"
-    )
+    text.includes("haslum")
   ) {
 
-    return (
-      "assets/Haslumhallen.jpg"
-    );
+    return "assets/Haslumhallen.jpg";
 
   }
 
@@ -2215,13 +1889,7 @@ function getVenueImage(
 }
 
 
-/* =====================================================
-   DRIVER HELPERS
-===================================================== */
-
-function transportIcon(
-  person
-) {
+function transportIcon(person) {
 
   if (!person) {
     return "–";
@@ -2229,8 +1897,7 @@ function transportIcon(
 
 
   if (
-    person ===
-    "Jentene"
+    person === "Jentene"
   ) {
 
     return "🚋";
@@ -2239,8 +1906,7 @@ function transportIcon(
 
 
   if (
-    person ===
-    "Ingen"
+    person === "Ingen"
   ) {
 
     return "–";
@@ -2253,34 +1919,25 @@ function transportIcon(
 }
 
 
-function displayPerson(
-  person
-) {
+function displayPerson(person) {
 
   return person || "–";
 
 }
 
 
-/* =====================================================
-   CURRENT WEEK
-===================================================== */
-
 function getCurrentScheduleWeek() {
 
   const today =
     new Date();
 
-  today.setHours(
-    0,0,0,0
-  );
+  today.setHours(0,0,0,0);
 
 
   const weeks =
     [...new Set(
       rides.map(
-        ride =>
-          ride.week
+        ride => ride.week
       )
     )];
 
@@ -2293,29 +1950,23 @@ function getCurrentScheduleWeek() {
     const weekRides =
       rides.filter(
         ride =>
-          ride.week ===
-          week
+          ride.week === week
       );
 
 
-    if (
-      !weekRides.length
-    ) {
+    if (!weekRides.length) {
       continue;
     }
 
 
     const firstDate =
       parseDate(
-        weekRides[0]
-          .date
+        weekRides[0].date
       );
 
 
     const monday =
-      new Date(
-        firstDate
-      );
+      new Date(firstDate);
 
 
     const day =
@@ -2340,9 +1991,7 @@ function getCurrentScheduleWeek() {
 
 
     const sunday =
-      new Date(
-        monday
-      );
+      new Date(monday);
 
 
     sunday.setDate(
@@ -2390,15 +2039,10 @@ function getCurrentScheduleWeek() {
 }
 
 
-/* =====================================================
-   RENDER CURRENT VIEW
-===================================================== */
-
 function renderCurrentView() {
 
   if (
-    currentView ===
-    "games"
+    currentView === "games"
   ) {
 
     renderGames();
@@ -2413,10 +2057,6 @@ function renderCurrentView() {
 
 }
 
-
-/* =====================================================
-   RENDER RIDES
-===================================================== */
 
 function renderRides() {
 
@@ -2443,8 +2083,7 @@ function renderRides() {
   const allWeeks =
     [...new Set(
       rides.map(
-        ride =>
-          ride.week
+        ride => ride.week
       )
     )];
 
@@ -2453,15 +2092,13 @@ function renderRides() {
 
 
   if (
-    currentMode ===
-    "all"
+    currentMode === "all"
   ) {
 
     visibleWeeks =
       allWeeks.filter(
         week =>
-          week >=
-          currentWeek
+          week >= currentWeek
       );
 
   }
@@ -2472,14 +2109,11 @@ function renderRides() {
       allWeeks
         .filter(
           week =>
-            week >=
-            currentWeek
+            week >= currentWeek
         )
         .slice(
           0,
-          Number(
-            currentMode
-          )
+          Number(currentMode)
         );
 
   }
@@ -2492,18 +2126,15 @@ function renderRides() {
       const weekRides =
         rides.filter(
           ride =>
-            ride.week ===
-            week
+            ride.week === week
         );
 
 
       const holiday =
         weekRides.every(
           ride =>
-            ride.to ===
-              "Ingen" &&
-            ride.from ===
-              "Ingen"
+            ride.to === "Ingen" &&
+            ride.from === "Ingen"
         );
 
 
@@ -2544,8 +2175,7 @@ function renderRides() {
 
 
       if (
-        week ===
-        currentWeek
+        week === currentWeek
       ) {
 
         titleText =
@@ -2568,8 +2198,7 @@ function renderRides() {
 
 
         if (
-          wi ===
-          ci + 1
+          wi === ci + 1
         ) {
 
           titleText =
@@ -2591,9 +2220,7 @@ function renderRides() {
       `;
 
 
-      section.appendChild(
-        title
-      );
+      section.appendChild(title);
 
 
       weekRides.forEach(
@@ -2601,10 +2228,8 @@ function renderRides() {
 
 
           if (
-            ride.to ===
-              "Ingen" &&
-            ride.from ===
-              "Ingen"
+            ride.to === "Ingen" &&
+            ride.from === "Ingen"
           ) {
 
             return;
@@ -2615,8 +2240,7 @@ function renderRides() {
           section.appendChild(
             createRideCard(
               ride,
-              week !==
-                currentWeek
+              week !== currentWeek
             )
           );
 
@@ -2636,10 +2260,6 @@ function renderRides() {
 
 }
 
-
-/* =====================================================
-   RIDE CARD
-===================================================== */
 
 function createRideCard(
   ride,
@@ -2810,9 +2430,7 @@ function createRideCard(
 
     <button
       class="swap-button"
-      ${past
-        ? "disabled"
-        : ""}
+      ${past ? "disabled" : ""}
     >
 
       <span class="swap-icon">
@@ -2851,10 +2469,6 @@ function createRideCard(
 
 }
 
-
-/* =====================================================
-   HOLIDAY
-===================================================== */
 
 function renderHoliday(
   week,
@@ -2899,10 +2513,6 @@ function renderHoliday(
 }
 
 
-/* =====================================================
-   FOOTER
-===================================================== */
-
 function renderFooter() {
 
   const footer =
@@ -2942,10 +2552,6 @@ function renderFooter() {
 
 }
 
-
-/* =====================================================
-   GAMES
-===================================================== */
 
 function renderGames() {
 
@@ -2997,9 +2603,7 @@ function renderGames() {
     game => {
 
       content.appendChild(
-        createGameCard(
-          game
-        )
+        createGameCard(game)
       );
 
     }
@@ -3008,13 +2612,7 @@ function renderGames() {
 }
 
 
-/* =====================================================
-   GAME CARD
-===================================================== */
-
-function createGameCard(
-  game
-) {
+function createGameCard(game) {
 
   const date =
     getDateParts(
@@ -3122,25 +2720,6 @@ function createGameCard(
 
 
       ${
-        game.organizer
-          ? `
-            <div class="game-meta">
-
-              <span>
-                🏟️
-              </span>
-
-              <span>
-                ${game.organizer}
-              </span>
-
-            </div>
-          `
-          : ""
-      }
-
-
-      ${
         game.address
           ? `
             <div class="game-meta">
@@ -3195,13 +2774,7 @@ function createGameCard(
 }
 
 
-/* =====================================================
-   MODAL
-===================================================== */
-
-function openModal(
-  rideId
-) {
+function openModal(rideId) {
 
   selectedRideId =
     rideId;
@@ -3260,9 +2833,7 @@ function openModal(
 
   backdrop
     .classList
-    .add(
-      "show"
-    );
+    .add("show");
 
 }
 
@@ -3271,9 +2842,7 @@ function closeModal() {
 
   backdrop
     .classList
-    .remove(
-      "show"
-    );
+    .remove("show");
 
 
   selectedRideId =
@@ -3284,10 +2853,6 @@ function closeModal() {
 
 }
 
-
-/* =====================================================
-   POST
-===================================================== */
 
 function wait(ms) {
 
@@ -3302,16 +2867,13 @@ function wait(ms) {
 }
 
 
-async function postChange(
-  payload
-) {
+async function postChange(payload) {
 
   const response =
     await fetch(
       API_URL,
       {
-        method:
-          "POST",
+        method: "POST",
 
         headers: {
           "Content-Type":
@@ -3340,19 +2902,13 @@ async function postChange(
 }
 
 
-/* =====================================================
-   SAVE CHANGE
-===================================================== */
-
 async function saveChanges() {
 
   const ride =
     rides.find(
       item =>
         String(item.id) ===
-        String(
-          selectedRideId
-        )
+        String(selectedRideId)
     );
 
 
@@ -3417,17 +2973,13 @@ async function saveChanges() {
 
   const payload = {
 
-    id:
-      ride.id,
+    id: ride.id,
 
-    pin:
-      enteredPin,
+    pin: enteredPin,
 
-    to:
-      selectedTo,
+    to: selectedTo,
 
-    from:
-      selectedFrom
+    from: selectedFrom
 
   };
 
@@ -3487,31 +3039,15 @@ async function saveChanges() {
     }
 
 
-    if (
-      selectedTo
-    ) {
-
-      ride.to =
-        selectedTo;
-
+    if (selectedTo) {
+      ride.to = selectedTo;
     }
 
 
-    if (
-      selectedFrom
-    ) {
-
-      ride.from =
-        selectedFrom;
-
+    if (selectedFrom) {
+      ride.from = selectedFrom;
     }
 
-
-    /*
-      Lokal markering.
-      Når backend senere støtter changed,
-      blir denne felles for alle.
-    */
 
     ride.changed =
       true;
@@ -3541,9 +3077,7 @@ async function saveChanges() {
     );
 
 
-    loadAllData(
-      false
-    );
+    loadAllData(false);
 
 
     setTimeout(
@@ -3555,9 +3089,7 @@ async function saveChanges() {
 
   catch (error) {
 
-    console.error(
-      error
-    );
+    console.error(error);
 
 
     showModalMessage(
@@ -3577,10 +3109,6 @@ async function saveChanges() {
 
 }
 
-
-/* =====================================================
-   MODAL MESSAGES
-===================================================== */
 
 function showModalMessage(
   text,
@@ -3609,10 +3137,6 @@ function clearModalMessage() {
 }
 
 
-/* =====================================================
-   NAVIGATION
-===================================================== */
-
 ridesNav.addEventListener(
   "click",
   () => {
@@ -3623,23 +3147,17 @@ ridesNav.addEventListener(
 
     ridesNav
       .classList
-      .add(
-        "active"
-      );
+      .add("active");
 
 
     gamesNav
       .classList
-      .remove(
-        "active"
-      );
+      .remove("active");
 
 
     rideToolbar
       .classList
-      .remove(
-        "hidden"
-      );
+      .remove("hidden");
 
 
     renderRides();
@@ -3658,23 +3176,17 @@ gamesNav.addEventListener(
 
     gamesNav
       .classList
-      .add(
-        "active"
-      );
+      .add("active");
 
 
     ridesNav
       .classList
-      .remove(
-        "active"
-      );
+      .remove("active");
 
 
     rideToolbar
       .classList
-      .add(
-        "hidden"
-      );
+      .add("hidden");
 
 
     renderGames();
@@ -3683,14 +3195,8 @@ gamesNav.addEventListener(
 );
 
 
-/* =====================================================
-   PERIOD BUTTONS
-===================================================== */
-
 document
-  .querySelectorAll(
-    ".tab"
-  )
+  .querySelectorAll(".tab")
   .forEach(
     tab => {
 
@@ -3700,24 +3206,18 @@ document
 
 
           document
-            .querySelectorAll(
-              ".tab"
-            )
+            .querySelectorAll(".tab")
             .forEach(
               item =>
                 item
                   .classList
-                  .remove(
-                    "active"
-                  )
+                  .remove("active")
             );
 
 
           tab
             .classList
-            .add(
-              "active"
-            );
+            .add("active");
 
 
           currentMode =
@@ -3733,14 +3233,8 @@ document
   );
 
 
-/* =====================================================
-   MODAL BUTTONS
-===================================================== */
-
 document
-  .getElementById(
-    "closeModal"
-  )
+  .getElementById("closeModal")
   .addEventListener(
     "click",
     closeModal
@@ -3748,9 +3242,7 @@ document
 
 
 document
-  .getElementById(
-    "cancelButton"
-  )
+  .getElementById("cancelButton")
   .addEventListener(
     "click",
     closeModal
@@ -3758,9 +3250,7 @@ document
 
 
 document
-  .getElementById(
-    "saveButton"
-  )
+  .getElementById("saveButton")
   .addEventListener(
     "click",
     saveChanges
@@ -3801,13 +3291,7 @@ document.addEventListener(
 );
 
 
-/* =====================================================
-   START
-===================================================== */
-
-loadAllData(
-  true
-);
+loadAllData(true);
 
 </script>
 
