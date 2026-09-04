@@ -1,730 +1,1577 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#082742">
-
-  <title>Kjøreliste håndball</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    :root {
-      --navy: #082742;
-      --green: #159a61;
-      --green-soft: #e8f6ee;
-      --blue: #2266b0;
-      --blue-soft: #edf4fb;
-      --text: #172033;
-      --muted: #6e7785;
-      --border: #dfe5eb;
-      --background: #f3f6f9;
-      --card: #ffffff;
-      --past-bg: #f1f3f5;
-      --past-date: #e2e5e8;
-      --past-text: #7a818a;
-      --red: #c94141;
-      --red-soft: #fff0f0;
-      --shadow: 0 4px 14px rgba(0,0,0,.055);
-    }
-
-    body {
-      margin: 0;
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif;
-      background: var(--background);
-      color: var(--text);
-    }
-
-    button,
-    select,
-    input {
-      font: inherit;
-    }
-
-    .app {
-      max-width: 820px;
-      margin: 0 auto;
-      min-height: 100vh;
-      background: white;
-      box-shadow: 0 0 30px rgba(0,0,0,.04);
-    }
-
-    .header {
-      background: linear-gradient(
-        135deg,
-        var(--navy),
-        #061a2e
-      );
-      color: white;
-      padding: 22px 18px 20px;
-    }
-
-    .header-row {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .logo {
-      width: 54px;
-      height: 54px;
-      border-radius: 50%;
-      border: 3px solid #f5c945;
-      color: #f5c945;
-      display: grid;
-      place-items: center;
-      font-size: 27px;
-      flex-shrink: 0;
-    }
-
-    .header h1 {
-      margin: 0;
-      font-size: 26px;
-      line-height: 1.05;
-    }
-
-    .season {
-      margin-top: 5px;
-      font-size: 17px;
-      opacity: .86;
-    }
-
-    .toolbar {
-      padding: 16px 14px 6px;
-      background: white;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    .tabs {
-      display: grid;
-      grid-template-columns: 1.25fr 1fr 1fr;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-    }
-
-    .tab {
-      border: 0;
-      border-right: 1px solid var(--border);
-      background: white;
-      color: #344055;
-      padding: 13px 8px;
-      font-weight: 750;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    .tab:last-child {
-      border-right: 0;
-    }
-
-    .tab.active {
-      background: var(--green);
-      color: white;
-    }
-
-    .content {
-      padding: 8px 14px 35px;
-    }
-
-    .week-section {
-      margin-top: 22px;
-    }
-
-    .week-title {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      margin-bottom: 10px;
-      font-size: 21px;
-      font-weight: 850;
-    }
-
-    .ride-card {
-      display: grid;
-      grid-template-columns:
-        86px
-        minmax(0,1fr)
-        145px
-        145px
-        86px;
-      gap: 10px;
-      align-items: center;
-      padding: 10px;
-      margin-bottom: 10px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      box-shadow: var(--shadow);
-    }
-
-    .date-box {
-      border-radius: 11px;
-      padding: 7px 6px;
-      text-align: center;
-      background: var(--green-soft);
-      color: #147743;
-      min-height: 88px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .ride-card.next-week .date-box {
-      background: var(--blue-soft);
-      color: #245c99;
-    }
-
-    .date-day {
-      font-size: 12px;
-      font-weight: 850;
-      text-transform: uppercase;
-    }
-
-    .date-number {
-      font-size: 30px;
-      font-weight: 900;
-      line-height: 1;
-      margin: 3px 0;
-    }
-
-    .date-month {
-      font-size: 12px;
-      font-weight: 750;
-    }
-
-    .details {
-      min-width: 0;
-    }
-
-    .detail-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin: 5px 0;
-      font-size: 15px;
-    }
-
-    .detail-icon {
-      width: 20px;
-      text-align: center;
-      flex-shrink: 0;
-    }
-
-    .assignment {
-      min-width: 0;
-      border-left: 1px solid var(--border);
-      padding-left: 12px;
-    }
-
-    .assignment-label {
-      font-size: 11px;
-      color: var(--muted);
-      font-weight: 850;
-      text-transform: uppercase;
-      letter-spacing: .35px;
-      margin-bottom: 4px;
-    }
-
-    .assignment-person {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 17px;
-      font-weight: 850;
-      line-height: 1.1;
-    }
-
-    .assignment-icon {
-      font-size: 22px;
-    }
-
-    .swap-button {
-      border: 0;
-      border-radius: 10px;
-      background: var(--green-soft);
-      color: #157842;
-      padding: 10px 7px;
-      font-weight: 850;
-      cursor: pointer;
-      min-height: 64px;
-    }
-
-    .ride-card.next-week .swap-button {
-      background: var(--blue-soft);
-      color: var(--blue);
-    }
-
-    .swap-icon {
-      display: block;
-      font-size: 25px;
-      line-height: 1;
-      margin-bottom: 3px;
-    }
-
-    .ride-card.past {
-      background: var(--past-bg);
-      color: var(--past-text);
-      box-shadow: none;
-      opacity: .68;
-    }
-
-    .ride-card.past .date-box {
-      background: var(--past-date);
-      color: #6f767e;
-    }
-
-    .ride-card.past .assignment-label {
-      color: #8b9198;
-    }
-
-    .ride-card.past .assignment {
-      border-color: #d5d9dd;
-    }
-
-    .ride-card.past .swap-button {
-      background: #e0e3e6;
-      color: #9a9fa5;
-      cursor: default;
-      pointer-events: none;
-    }
-
-    .holiday {
-      margin-top: 18px;
-      border: 1px solid #eda2a2;
-      background: var(--red-soft);
-      border-radius: 14px;
-      padding: 15px;
-      color: #a92f2f;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .holiday-icon {
-      font-size: 34px;
-    }
-
-    .holiday-title {
-      font-size: 17px;
-      font-weight: 900;
-    }
-
-    .holiday-text {
-      margin-top: 2px;
-      color: #4e5662;
-      font-size: 14px;
-    }
-
-    .footer-card {
-      margin-top: 18px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: white;
-      padding: 15px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .footer-icon {
-      font-size: 34px;
-    }
-
-    .footer-title {
-      font-weight: 900;
-    }
-
-    .footer-text {
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: 2px;
-    }
-
-    .status {
-      padding: 35px 15px;
-      text-align: center;
-      color: var(--muted);
-    }
-
-    .status-icon {
-      font-size: 32px;
-      margin-bottom: 8px;
-    }
-
-    .sync-note {
-      margin-top: 7px;
-      font-size: 11px;
-      color: #8b929b;
-    }
-
-    .error-box {
-      margin: 25px 0;
-      padding: 18px;
-      border-radius: 12px;
-      background: #fff0f0;
-      color: #a32d2d;
-      border: 1px solid #efb0b0;
-    }
-
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(5,18,30,.55);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 14px;
-      z-index: 100;
-    }
-
-    .modal-backdrop.show {
-      display: flex;
-    }
-
-    .modal {
-      width: min(620px,100%);
-      max-height: 92vh;
-      overflow-y: auto;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 24px 60px rgba(0,0,0,.22);
-      padding: 18px;
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 12px;
-    }
-
-    .modal-title {
-      font-size: 20px;
-      font-weight: 900;
-    }
-
-    .modal-date {
-      color: var(--muted);
-      margin-top: 3px;
-      font-size: 14px;
-    }
-
-    .close-button {
-      border: 0;
-      background: transparent;
-      font-size: 25px;
-      cursor: pointer;
-    }
-
-    .change-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .change-box {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px;
-    }
-
-    .change-label {
-      font-size: 12px;
-      font-weight: 850;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 5px;
-    }
-
-    .current-driver {
-      font-size: 18px;
-      font-weight: 900;
-      margin-bottom: 10px;
-    }
-
-    select {
-      width: 100%;
-      border: 1px solid #bec7d2;
-      border-radius: 9px;
-      padding: 10px 11px;
-      background: white;
-      color: var(--text);
-    }
-
-    .pin-wrap {
-      margin-top: 18px;
-      text-align: center;
-    }
-
-    .pin-label {
-      font-size: 13px;
-      font-weight: 850;
-      margin-bottom: 7px;
-    }
-
-    .pin-input {
-      width: 150px;
-      text-align: center;
-      letter-spacing: 8px;
-      font-weight: 900;
-      font-size: 20px;
-      border: 1px solid #aeb8c4;
-      border-radius: 10px;
-      padding: 10px;
-    }
-
-    .pin-help {
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 6px;
-    }
-
-    .modal-message {
-      display: none;
-      margin-top: 14px;
-      padding: 11px;
-      border-radius: 9px;
-      font-size: 13px;
-    }
-
-    .modal-message.error {
-      display: block;
-      background: #fff0f0;
-      color: #a42d2d;
-      border: 1px solid #efb0b0;
-    }
-
-    .modal-message.success {
-      display: block;
-      background: var(--green-soft);
-      color: #176e42;
-      border: 1px solid #b9e0ca;
-    }
-
-    .modal-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-      margin-top: 18px;
-      padding-top: 15px;
-      border-top: 1px solid var(--border);
-    }
-
-    .btn {
-      border-radius: 9px;
-      padding: 10px 16px;
-      font-weight: 850;
-      cursor: pointer;
-      border: 1px solid var(--border);
-    }
-
-    .btn-cancel {
-      background: white;
-      color: var(--text);
-    }
-
-    .btn-save {
-      background: var(--green);
-      border-color: var(--green);
-      color: white;
-    }
-
-    .btn-save:disabled {
-      background: #b9c1c9;
-      border-color: #b9c1c9;
-      cursor: default;
-    }
-
-    @media (max-width: 720px) {
-      .app {
-        max-width: 100%;
-        box-shadow: none;
-      }
-
-      .header {
-        padding: 18px 14px 16px;
-      }
-
-      .header h1 {
-        font-size: 22px;
-      }
-
-      .logo {
-        width: 47px;
-        height: 47px;
-        font-size: 23px;
-      }
-
-      .toolbar {
-        padding-left: 10px;
-        padding-right: 10px;
-      }
-
-      .content {
-        padding-left: 10px;
-        padding-right: 10px;
-      }
-
-      .tab {
-        font-size: 12px;
-        padding: 12px 5px;
-      }
-
-      .week-title {
-        font-size: 19px;
-      }
-
-      .ride-card {
-        grid-template-columns:
-          62px
-          minmax(0,1fr)
-          62px;
-
-        grid-template-areas:
-          "date details swap"
-          "date to swap"
-          "date from swap";
-
-        gap: 7px 9px;
-        padding: 8px;
-      }
-
-      .date-box {
-        grid-area: date;
-        min-height: 110px;
-        align-self: stretch;
-      }
-
-      .date-number {
-        font-size: 26px;
-      }
-
-      .details {
-        grid-area: details;
-      }
-
-      .assignment.to {
-        grid-area: to;
-      }
-
-      .assignment.from {
-        grid-area: from;
-      }
-
-      .assignment {
-        border-left: 0;
-        border-top: 1px solid var(--border);
-        padding: 6px 0 0;
-      }
-
-      .assignment-label {
-        font-size: 10px;
-        margin-bottom: 2px;
-      }
-
-      .assignment-person {
-        font-size: 14px;
-      }
-
-      .assignment-icon {
-        font-size: 17px;
-      }
-
-      .swap-button {
-        grid-area: swap;
-        min-height: 100%;
-        padding: 7px 4px;
-        font-size: 12px;
-      }
-
-      .swap-icon {
-        font-size: 22px;
-      }
-
-      .detail-row {
-        font-size: 13px;
-        margin: 3px 0;
-      }
-
-      .change-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .modal-actions {
-        display: grid;
-        grid-template-columns: 1fr 1.2fr;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#082742">
+
+<title>Kjøreliste håndball</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --navy: #082742;
+  --navy-light: #123f69;
+
+  --green: #159a61;
+  --green-soft: #e8f6ee;
+
+  --blue: #2266b0;
+  --blue-soft: #edf4fb;
+
+  --yellow: #f5c945;
+
+  --text: #172033;
+  --muted: #6e7785;
+
+  --border: #dfe5eb;
+  --background: #f3f6f9;
+  --card: #ffffff;
+
+  --past-bg: #f1f3f5;
+  --past-date: #e2e5e8;
+  --past-text: #8a9097;
+
+  --red: #c94141;
+  --red-soft: #fff0f0;
+
+  --orange: #a96700;
+  --orange-soft: #fff5df;
+
+  --shadow: 0 4px 14px rgba(0,0,0,.055);
+}
+
+body {
+  margin: 0;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+
+  background: var(--background);
+  color: var(--text);
+}
+
+button,
+select,
+input {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app {
+  max-width: 820px;
+  margin: 0 auto;
+
+  min-height: 100vh;
+
+  background: white;
+
+  box-shadow:
+    0 0 30px rgba(0,0,0,.04);
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header {
+  background:
+    linear-gradient(
+      135deg,
+      var(--navy),
+      #061a2e
+    );
+
+  color: white;
+
+  padding:
+    18px 18px
+    17px;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+}
+
+.club-logo {
+  width: 62px;
+  height: 62px;
+
+  object-fit: contain;
+
+  flex-shrink: 0;
+}
+
+.header h1 {
+  margin: 0;
+
+  font-size: 27px;
+  line-height: 1.05;
+}
+
+.season {
+  margin-top: 5px;
+
+  font-size: 17px;
+  opacity: .87;
+}
+
+
+/* =====================================================
+   MAIN NAVIGATION
+===================================================== */
+
+.main-navigation {
+  padding:
+    14px 14px
+    5px;
+
+  background: white;
+
+  display: grid;
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 8px;
+}
+
+.main-nav-button {
+  border:
+    1px solid var(--border);
+
+  border-radius: 13px;
+
+  padding:
+    12px 10px;
+
+  background: white;
+
+  color: #344055;
+
+  font-weight: 850;
+
+  cursor: pointer;
+}
+
+.main-nav-button.active {
+  background: var(--navy);
+  border-color: var(--navy);
+
+  color: white;
+}
+
+
+/* =====================================================
+   PERIOD TABS
+===================================================== */
+
+.toolbar {
+  padding:
+    8px 14px
+    6px;
+
+  background: white;
+
+  position: sticky;
+  top: 0;
+
+  z-index: 10;
+}
+
+.toolbar.hidden {
+  display: none;
+}
+
+.tabs {
+  display: grid;
+
+  grid-template-columns:
+    1.25fr
+    1fr
+    1fr;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 14px;
+
+  overflow: hidden;
+}
+
+.tab {
+  border: 0;
+
+  border-right:
+    1px solid var(--border);
+
+  background: white;
+
+  color: #344055;
+
+  padding:
+    13px 8px;
+
+  font-weight: 750;
+  font-size: 14px;
+
+  cursor: pointer;
+}
+
+.tab:last-child {
+  border-right: 0;
+}
+
+.tab.active {
+  background: var(--green);
+  color: white;
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.content {
+  padding:
+    8px 14px
+    35px;
+}
+
+.week-section {
+  margin-top: 22px;
+}
+
+
+/* =====================================================
+   NEUTRAL CALENDAR ICON
+===================================================== */
+
+.calendar-icon {
+  width: 27px;
+  height: 27px;
+
+  border:
+    2px solid #8b95a2;
+
+  border-radius: 5px;
+
+  position: relative;
+
+  flex-shrink: 0;
+}
+
+.calendar-icon::before {
+  content: "";
+
+  position: absolute;
+
+  left: -2px;
+  right: -2px;
+  top: 6px;
+
+  height: 5px;
+
+  background: #8b95a2;
+}
+
+.calendar-icon::after {
+  content: "";
+
+  position: absolute;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background: #8b95a2;
+
+  left: 5px;
+  bottom: 5px;
+
+  box-shadow:
+    8px 0 #8b95a2;
+}
+
+
+/* =====================================================
+   WEEK TITLE
+===================================================== */
+
+.week-title {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 10px;
+
+  font-size: 21px;
+  font-weight: 850;
+}
+
+
+/* =====================================================
+   RIDE CARDS
+===================================================== */
+
+.ride-card {
+  display: grid;
+
+  grid-template-columns:
+    86px
+    minmax(0,1fr)
+    145px
+    145px
+    86px;
+
+  gap: 10px;
+
+  align-items: center;
+
+  padding: 10px;
+
+  margin-bottom: 10px;
+
+  background:
+    var(--card);
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 14px;
+
+  box-shadow:
+    var(--shadow);
+}
+
+
+/* =====================================================
+   DATE BOX
+===================================================== */
+
+.date-box {
+  border-radius: 11px;
+
+  padding:
+    7px 6px;
+
+  text-align: center;
+
+  background:
+    var(--green-soft);
+
+  color:
+    #147743;
+
+  min-height: 88px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+.ride-card.next-week .date-box {
+  background:
+    var(--blue-soft);
+
+  color:
+    #245c99;
+}
+
+.date-day {
+  font-size: 12px;
+
+  font-weight: 850;
+
+  text-transform:
+    uppercase;
+}
+
+.date-number {
+  font-size: 30px;
+
+  font-weight: 900;
+
+  line-height: 1;
+
+  margin:
+    3px 0;
+}
+
+.date-month {
+  font-size: 12px;
+
+  font-weight: 750;
+}
+
+
+/* =====================================================
+   DETAILS
+===================================================== */
+
+.details {
+  min-width: 0;
+}
+
+.detail-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin:
+    5px 0;
+
+  font-size: 15px;
+}
+
+.detail-icon {
+  width: 20px;
+
+  text-align: center;
+
+  flex-shrink: 0;
+}
+
+.venue-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+}
+
+.venue-image {
+  width: 82px;
+  height: 48px;
+
+  border-radius: 7px;
+
+  object-fit: cover;
+
+  margin-left: auto;
+
+  border:
+    1px solid #d9dee4;
+}
+
+
+/* =====================================================
+   DRIVER
+===================================================== */
+
+.assignment {
+  min-width: 0;
+
+  border-left:
+    1px solid var(--border);
+
+  padding-left: 12px;
+}
+
+.assignment-label {
+  font-size: 11px;
+
+  color:
+    var(--muted);
+
+  font-weight: 850;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    .35px;
+
+  margin-bottom: 4px;
+}
+
+.assignment-person {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  font-size: 17px;
+
+  font-weight: 850;
+
+  line-height: 1.1;
+}
+
+.assignment-icon {
+  font-size: 22px;
+}
+
+
+/* =====================================================
+   CHANGED BADGE
+===================================================== */
+
+.changed-badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  margin-top: 7px;
+
+  padding:
+    4px 7px;
+
+  border-radius: 7px;
+
+  background:
+    var(--orange-soft);
+
+  color:
+    var(--orange);
+
+  font-size: 11px;
+
+  font-weight: 850;
+}
+
+
+/* =====================================================
+   SWAP
+===================================================== */
+
+.swap-button {
+  border: 0;
+
+  border-radius: 10px;
+
+  background:
+    var(--green-soft);
+
+  color:
+    #157842;
+
+  padding:
+    10px 7px;
+
+  font-weight: 850;
+
+  cursor: pointer;
+
+  min-height: 64px;
+}
+
+.ride-card.next-week .swap-button {
+  background:
+    var(--blue-soft);
+
+  color:
+    var(--blue);
+}
+
+.swap-icon {
+  display: block;
+
+  font-size: 25px;
+
+  line-height: 1;
+
+  margin-bottom: 3px;
+}
+
+
+/* =====================================================
+   PAST RIDES
+===================================================== */
+
+.ride-card.past {
+  background:
+    var(--past-bg);
+
+  color:
+    var(--past-text);
+
+  box-shadow: none;
+
+  opacity: .67;
+}
+
+.ride-card.past .date-box {
+  background:
+    var(--past-date);
+
+  color:
+    #6f767e;
+}
+
+.ride-card.past .assignment-label {
+  color:
+    #8b9198;
+}
+
+.ride-card.past .assignment {
+  border-color:
+    #d5d9dd;
+}
+
+.ride-card.past .swap-button {
+  background:
+    #e0e3e6;
+
+  color:
+    #9a9fa5;
+
+  cursor: default;
+
+  pointer-events: none;
+}
+
+
+/* =====================================================
+   HOLIDAY
+===================================================== */
+
+.holiday {
+  margin-top: 18px;
+
+  border:
+    1px solid #eda2a2;
+
+  background:
+    var(--red-soft);
+
+  border-radius: 14px;
+
+  padding: 15px;
+
+  color:
+    #a92f2f;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+.holiday-icon {
+  font-size: 34px;
+}
+
+.holiday-title {
+  font-size: 17px;
+
+  font-weight: 900;
+}
+
+.holiday-text {
+  margin-top: 2px;
+
+  color:
+    #4e5662;
+
+  font-size: 14px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer-card {
+  margin-top: 18px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 14px;
+
+  background: white;
+
+  padding: 15px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+}
+
+.footer-swap-icon {
+  width: 45px;
+  height: 45px;
+
+  border-radius: 50%;
+
+  display: grid;
+
+  place-items: center;
+
+  flex-shrink: 0;
+
+  background:
+    var(--navy);
+
+  color: white;
+
+  font-size: 25px;
+}
+
+.footer-title {
+  font-weight: 900;
+}
+
+.footer-text {
+  color:
+    var(--muted);
+
+  font-size: 13px;
+
+  margin-top: 2px;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status {
+  padding:
+    35px 15px;
+
+  text-align: center;
+
+  color:
+    var(--muted);
+}
+
+.status-icon {
+  font-size: 32px;
+
+  margin-bottom: 8px;
+}
+
+.error-box {
+  margin:
+    25px 0;
+
+  padding: 18px;
+
+  border-radius: 12px;
+
+  background:
+    #fff0f0;
+
+  color:
+    #a32d2d;
+
+  border:
+    1px solid #efb0b0;
+}
+
+
+/* =====================================================
+   GAMES
+===================================================== */
+
+.games-heading {
+  margin-top: 20px;
+
+  margin-bottom: 11px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  font-size: 22px;
+
+  font-weight: 900;
+}
+
+.game-card {
+  display: grid;
+
+  grid-template-columns:
+    78px
+    minmax(0,1fr);
+
+  gap: 13px;
+
+  padding: 12px;
+
+  margin-bottom: 11px;
+
+  background: white;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 14px;
+
+  box-shadow:
+    var(--shadow);
+}
+
+.game-card.past {
+  background:
+    var(--past-bg);
+
+  color:
+    var(--past-text);
+
+  box-shadow: none;
+
+  opacity: .68;
+}
+
+.game-date-box {
+  background:
+    var(--blue-soft);
+
+  color:
+    #245c99;
+
+  border-radius: 11px;
+
+  min-height: 112px;
+
+  text-align: center;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+.game-card.past .game-date-box {
+  background:
+    var(--past-date);
+
+  color:
+    #737980;
+}
+
+.game-time {
+  font-size: 13px;
+
+  font-weight: 850;
+
+  margin-top: 5px;
+}
+
+.game-info {
+  min-width: 0;
+}
+
+.game-teams {
+  font-size: 19px;
+
+  font-weight: 900;
+
+  margin-bottom: 7px;
+
+  line-height: 1.25;
+}
+
+.game-meta {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin:
+    5px 0;
+
+  font-size: 14px;
+}
+
+.game-venue-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.game-venue-image {
+  width: 93px;
+  height: 52px;
+
+  border-radius: 7px;
+
+  object-fit: cover;
+
+  margin-left: auto;
+
+  border:
+    1px solid #d9dee4;
+}
+
+.game-tournament {
+  margin-top: 8px;
+
+  padding-top: 7px;
+
+  border-top:
+    1px solid var(--border);
+
+  font-size: 12px;
+
+  color:
+    var(--muted);
+}
+
+.map-link {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  margin-top: 8px;
+
+  padding:
+    7px 9px;
+
+  border-radius: 8px;
+
+  text-decoration: none;
+
+  background:
+    var(--blue-soft);
+
+  color:
+    var(--blue);
+
+  font-size: 12px;
+
+  font-weight: 850;
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal-backdrop {
+  position: fixed;
+
+  inset: 0;
+
+  background:
+    rgba(5,18,30,.55);
+
+  display: none;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 14px;
+
+  z-index: 100;
+}
+
+.modal-backdrop.show {
+  display: flex;
+}
+
+.modal {
+  width:
+    min(620px,100%);
+
+  max-height: 92vh;
+
+  overflow-y: auto;
+
+  background: white;
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 24px 60px rgba(0,0,0,.22);
+
+  padding: 18px;
+}
+
+.modal-header {
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    flex-start;
+
+  gap: 12px;
+}
+
+.modal-title {
+  font-size: 20px;
+
+  font-weight: 900;
+}
+
+.modal-date {
+  color:
+    var(--muted);
+
+  margin-top: 3px;
+
+  font-size: 14px;
+}
+
+.close-button {
+  border: 0;
+
+  background: transparent;
+
+  font-size: 25px;
+
+  cursor: pointer;
+}
+
+.change-grid {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 14px;
+
+  margin-top: 18px;
+}
+
+.change-box {
+  border:
+    1px solid var(--border);
+
+  border-radius: 12px;
+
+  padding: 12px;
+}
+
+.change-label {
+  font-size: 12px;
+
+  font-weight: 850;
+
+  text-transform:
+    uppercase;
+
+  color:
+    var(--muted);
+
+  margin-bottom: 5px;
+}
+
+.current-driver {
+  font-size: 18px;
+
+  font-weight: 900;
+
+  margin-bottom: 10px;
+}
+
+select {
+  width: 100%;
+
+  border:
+    1px solid #bec7d2;
+
+  border-radius: 9px;
+
+  padding:
+    10px 11px;
+
+  background: white;
+
+  color:
+    var(--text);
+}
+
+.pin-wrap {
+  margin-top: 18px;
+
+  text-align: center;
+}
+
+.pin-label {
+  font-size: 13px;
+
+  font-weight: 850;
+
+  margin-bottom: 7px;
+}
+
+.pin-input {
+  width: 150px;
+
+  text-align: center;
+
+  letter-spacing: 8px;
+
+  font-weight: 900;
+
+  font-size: 20px;
+
+  border:
+    1px solid #aeb8c4;
+
+  border-radius: 10px;
+
+  padding: 10px;
+}
+
+.pin-help {
+  color:
+    var(--muted);
+
+  font-size: 12px;
+
+  margin-top: 6px;
+}
+
+.modal-message {
+  display: none;
+
+  margin-top: 14px;
+
+  padding: 11px;
+
+  border-radius: 9px;
+
+  font-size: 13px;
+}
+
+.modal-message.error {
+  display: block;
+
+  background:
+    #fff0f0;
+
+  color:
+    #a42d2d;
+
+  border:
+    1px solid #efb0b0;
+}
+
+.modal-message.success {
+  display: block;
+
+  background:
+    var(--green-soft);
+
+  color:
+    #176e42;
+
+  border:
+    1px solid #b9e0ca;
+}
+
+.modal-actions {
+  display: flex;
+
+  justify-content:
+    flex-end;
+
+  gap: 10px;
+
+  margin-top: 18px;
+
+  padding-top: 15px;
+
+  border-top:
+    1px solid var(--border);
+}
+
+.btn {
+  border-radius: 9px;
+
+  padding:
+    10px 16px;
+
+  font-weight: 850;
+
+  cursor: pointer;
+
+  border:
+    1px solid var(--border);
+}
+
+.btn-cancel {
+  background: white;
+
+  color:
+    var(--text);
+}
+
+.btn-save {
+  background:
+    var(--green);
+
+  border-color:
+    var(--green);
+
+  color: white;
+}
+
+.btn-save:disabled {
+  background:
+    #b9c1c9;
+
+  border-color:
+    #b9c1c9;
+
+  cursor: default;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 720px) {
+
+  .app {
+    max-width: 100%;
+
+    box-shadow: none;
+  }
+
+  .header {
+    padding:
+      15px 14px
+      14px;
+  }
+
+  .club-logo {
+    width: 52px;
+    height: 52px;
+  }
+
+  .header h1 {
+    font-size: 22px;
+  }
+
+  .season {
+    font-size: 15px;
+  }
+
+  .main-navigation {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .main-nav-button {
+    font-size: 14px;
+  }
+
+  .toolbar {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .content {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .tab {
+    font-size: 12px;
+
+    padding:
+      12px 5px;
+  }
+
+  .week-title {
+    font-size: 19px;
+  }
+
+
+  /* RIDES */
+
+  .ride-card {
+    grid-template-columns:
+      62px
+      minmax(0,1fr)
+      62px;
+
+    grid-template-areas:
+      "date details swap"
+      "date to swap"
+      "date from swap";
+
+    gap:
+      7px 9px;
+
+    padding: 8px;
+  }
+
+  .date-box {
+    grid-area: date;
+
+    min-height: 110px;
+
+    align-self: stretch;
+  }
+
+  .date-number {
+    font-size: 26px;
+  }
+
+  .details {
+    grid-area: details;
+  }
+
+  .assignment.to {
+    grid-area: to;
+  }
+
+  .assignment.from {
+    grid-area: from;
+  }
+
+  .assignment {
+    border-left: 0;
+
+    border-top:
+      1px solid var(--border);
+
+    padding:
+      6px 0 0;
+  }
+
+  .assignment-label {
+    font-size: 10px;
+
+    margin-bottom: 2px;
+  }
+
+  .assignment-person {
+    font-size: 14px;
+  }
+
+  .assignment-icon {
+    font-size: 17px;
+  }
+
+  .swap-button {
+    grid-area: swap;
+
+    min-height: 100%;
+
+    padding:
+      7px 4px;
+
+    font-size: 12px;
+  }
+
+  .swap-icon {
+    font-size: 22px;
+  }
+
+  .detail-row {
+    font-size: 13px;
+
+    margin:
+      3px 0;
+  }
+
+  .venue-image {
+    width: 70px;
+    height: 42px;
+  }
+
+
+  /* GAMES */
+
+  .games-heading {
+    font-size: 20px;
+  }
+
+  .game-card {
+    grid-template-columns:
+      66px minmax(0,1fr);
+
+    gap: 10px;
+
+    padding: 9px;
+  }
+
+  .game-date-box {
+    min-height: 120px;
+  }
+
+  .game-teams {
+    font-size: 17px;
+  }
+
+  .game-meta {
+    font-size: 13px;
+  }
+
+  .game-venue-image {
+    width: 80px;
+    height: 47px;
+  }
+
+
+  /* MODAL */
+
+  .change-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .modal-actions {
+    display: grid;
+
+    grid-template-columns:
+      1fr 1.2fr;
+  }
+
+}
+
+</style>
 </head>
+
 
 <body>
 
 <div class="app">
 
-  <header class="header">
-    <div class="header-row">
+<header class="header">
 
-      <div class="logo">
-        ◉
+  <div class="header-row">
+
+    <img
+      src="assets/STB-logo.png"
+      class="club-logo"
+      alt="Stabæk"
+    >
+
+    <div>
+
+      <h1>
+        Kjøreliste håndball
+      </h1>
+
+      <div class="season">
+        Høsten 2026
       </div>
-
-      <div>
-        <h1>Kjøreliste håndball</h1>
-        <div class="season">Høsten 2026</div>
-      </div>
-
-    </div>
-  </header>
-
-
-  <div class="toolbar">
-
-    <div class="tabs">
-
-      <button class="tab active" data-mode="2">
-        Denne + neste uke
-      </button>
-
-      <button class="tab" data-mode="4">
-        Neste 4 uker
-      </button>
-
-      <button class="tab" data-mode="all">
-        Hele planen
-      </button>
 
     </div>
 
   </div>
 
+</header>
 
-  <main class="content" id="schedule">
 
-    <div class="status">
-      <div class="status-icon">⏳</div>
-      Henter kjøreliste...
-    </div>
+<div class="main-navigation">
 
-  </main>
+  <button
+    id="ridesNav"
+    class="main-nav-button active"
+  >
+    🚗 Kjøreliste
+  </button>
+
+  <button
+    id="gamesNav"
+    class="main-nav-button"
+  >
+    🤾 Kamper
+  </button>
 
 </div>
 
 
-<div class="modal-backdrop" id="modalBackdrop">
+<div
+  class="toolbar"
+  id="rideToolbar"
+>
+
+  <div class="tabs">
+
+    <button
+      class="tab active"
+      data-mode="2"
+    >
+      Denne + neste uke
+    </button>
+
+    <button
+      class="tab"
+      data-mode="4"
+    >
+      Neste 4 uker
+    </button>
+
+    <button
+      class="tab"
+      data-mode="all"
+    >
+      Hele planen
+    </button>
+
+  </div>
+
+</div>
+
+
+<main
+  class="content"
+  id="content"
+>
+
+  <div class="status">
+
+    <div class="status-icon">
+      ⏳
+    </div>
+
+    Henter data...
+
+  </div>
+
+</main>
+
+</div>
+
+
+<!-- ==================================================
+     SWAP MODAL
+================================================== -->
+
+<div
+  class="modal-backdrop"
+  id="modalBackdrop"
+>
 
   <div class="modal">
 
@@ -736,11 +1583,17 @@
           Endre kjøring
         </div>
 
-        <div class="modal-date" id="modalDate"></div>
+        <div
+          class="modal-date"
+          id="modalDate"
+        ></div>
 
       </div>
 
-      <button class="close-button" id="closeModal">
+      <button
+        class="close-button"
+        id="closeModal"
+      >
         ×
       </button>
 
@@ -755,19 +1608,41 @@
           Til trening
         </div>
 
-        <div class="current-driver" id="currentTo"></div>
+        <div
+          class="current-driver"
+          id="currentTo"
+        ></div>
 
         <div class="change-label">
           Velg ny
         </div>
 
         <select id="newTo">
-          <option value="">Ingen endring</option>
-          <option value="Frid">Frid</option>
-          <option value="Hermine">Hermine</option>
-          <option value="Malin">Malin</option>
-          <option value="Jentene">Jentene</option>
-          <option value="Ingen">Ingen</option>
+
+          <option value="">
+            Ingen endring
+          </option>
+
+          <option value="Frid">
+            Frid
+          </option>
+
+          <option value="Hermine">
+            Hermine
+          </option>
+
+          <option value="Malin">
+            Malin
+          </option>
+
+          <option value="Jentene">
+            Jentene
+          </option>
+
+          <option value="Ingen">
+            Ingen
+          </option>
+
         </select>
 
       </div>
@@ -779,19 +1654,41 @@
           Hente
         </div>
 
-        <div class="current-driver" id="currentFrom"></div>
+        <div
+          class="current-driver"
+          id="currentFrom"
+        ></div>
 
         <div class="change-label">
           Velg ny
         </div>
 
         <select id="newFrom">
-          <option value="">Ingen endring</option>
-          <option value="Frid">Frid</option>
-          <option value="Hermine">Hermine</option>
-          <option value="Malin">Malin</option>
-          <option value="Jentene">Jentene</option>
-          <option value="Ingen">Ingen</option>
+
+          <option value="">
+            Ingen endring
+          </option>
+
+          <option value="Frid">
+            Frid
+          </option>
+
+          <option value="Hermine">
+            Hermine
+          </option>
+
+          <option value="Malin">
+            Malin
+          </option>
+
+          <option value="Jentene">
+            Jentene
+          </option>
+
+          <option value="Ingen">
+            Ingen
+          </option>
+
         </select>
 
       </div>
@@ -853,48 +1750,111 @@
 
 <script>
 
+/* =====================================================
+   API
+===================================================== */
+
 const API_URL =
   "https://script.google.com/macros/s/AKfycbwDt3kSwSWaCwUMdbKvVD_YdWkyPOj20YNZhv47SPs8MSJyYu6-I9k7NiWkizwEvZMA/exec";
 
+
 const STORAGE_KEY =
-  "handball_schedule_cache";
+  "handball_all_cache_v2";
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
 
 let rides = [];
-let currentMode = "2";
-let selectedRideId = null;
+let games = [];
 
-const scheduleEl =
-  document.getElementById("schedule");
+let currentMode = "2";
+
+let currentView =
+  "rides";
+
+let selectedRideId =
+  null;
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const content =
+  document.getElementById(
+    "content"
+  );
+
+const rideToolbar =
+  document.getElementById(
+    "rideToolbar"
+  );
+
+const ridesNav =
+  document.getElementById(
+    "ridesNav"
+  );
+
+const gamesNav =
+  document.getElementById(
+    "gamesNav"
+  );
 
 const backdrop =
-  document.getElementById("modalBackdrop");
+  document.getElementById(
+    "modalBackdrop"
+  );
 
 const modalDate =
-  document.getElementById("modalDate");
+  document.getElementById(
+    "modalDate"
+  );
 
 const currentTo =
-  document.getElementById("currentTo");
+  document.getElementById(
+    "currentTo"
+  );
 
 const currentFrom =
-  document.getElementById("currentFrom");
+  document.getElementById(
+    "currentFrom"
+  );
 
 const newTo =
-  document.getElementById("newTo");
+  document.getElementById(
+    "newTo"
+  );
 
 const newFrom =
-  document.getElementById("newFrom");
+  document.getElementById(
+    "newFrom"
+  );
 
 const pin =
-  document.getElementById("pin");
+  document.getElementById(
+    "pin"
+  );
 
 const modalMessage =
-  document.getElementById("modalMessage");
+  document.getElementById(
+    "modalMessage"
+  );
 
 const saveButton =
-  document.getElementById("saveButton");
+  document.getElementById(
+    "saveButton"
+  );
 
 
-async function loadSchedule(showCachedFirst = true) {
+/* =====================================================
+   LOAD DATA
+===================================================== */
+
+async function loadAllData(
+  showCachedFirst = true
+) {
 
   if (showCachedFirst) {
 
@@ -907,18 +1867,29 @@ async function loadSchedule(showCachedFirst = true) {
 
       if (cached) {
 
-        const cachedData =
-          JSON.parse(cached);
+        const parsed =
+          JSON.parse(
+            cached
+          );
 
         if (
-          Array.isArray(cachedData) &&
-          cachedData.length
+          parsed &&
+          Array.isArray(
+            parsed.rides
+          )
         ) {
 
           rides =
-            cachedData;
+            parsed.rides;
 
-          renderSchedule();
+          games =
+            Array.isArray(
+              parsed.games
+            )
+              ? parsed.games
+              : [];
+
+          renderCurrentView();
 
         }
 
@@ -926,13 +1897,7 @@ async function loadSchedule(showCachedFirst = true) {
 
     }
 
-    catch (error) {
-
-      console.log(
-        "Kunne ikke lese lokal cache."
-      );
-
-    }
+    catch (error) {}
 
   }
 
@@ -941,73 +1906,116 @@ async function loadSchedule(showCachedFirst = true) {
 
     const response =
       await fetch(
-        API_URL,
+        API_URL +
+        "?type=all",
         {
           cache: "no-cache"
         }
       );
 
+
     if (!response.ok) {
+
       throw new Error(
-        "Kunne ikke hente data."
+        "HTTP-feil"
       );
+
     }
+
 
     const data =
       await response.json();
 
-    if (!Array.isArray(data)) {
+
+    if (
+      !data ||
+      !Array.isArray(
+        data.rides
+      )
+    ) {
+
       throw new Error(
-        "Ugyldig dataformat."
+        "Ugyldig data"
       );
+
     }
 
+
     rides =
-      data
+      data.rides
         .filter(
-          ride =>
-            ride.date &&
-            ride.week
+          item =>
+            item.date
         )
         .sort(
           (a,b) =>
-            parseDate(a.date) -
-            parseDate(b.date)
+            parseDate(
+              a.date
+            ) -
+            parseDate(
+              b.date
+            )
         );
+
+
+    games =
+      Array.isArray(
+        data.games
+      )
+        ? data.games
+            .filter(
+              item =>
+                item.date
+            )
+            .sort(
+              (a,b) =>
+                parseDate(
+                  a.date
+                ) -
+                parseDate(
+                  b.date
+                )
+            )
+        : [];
+
 
     try {
 
       localStorage.setItem(
         STORAGE_KEY,
-        JSON.stringify(rides)
+        JSON.stringify({
+          rides,
+          games
+        })
       );
 
     }
 
-    catch (error) {
+    catch (error) {}
 
-      console.log(
-        "Kunne ikke lagre lokal cache."
-      );
 
-    }
-
-    renderSchedule();
+    renderCurrentView();
 
   }
 
   catch (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
 
-    if (!rides.length) {
 
-      scheduleEl.innerHTML = `
+    if (
+      !rides.length &&
+      !games.length
+    ) {
+
+      content.innerHTML = `
 
         <div class="error-box">
 
           <strong>
-            Kunne ikke hente kjøreliste.
+            Kunne ikke hente data.
           </strong>
 
           <br><br>
@@ -1015,6 +2023,7 @@ async function loadSchedule(showCachedFirst = true) {
           Prøv å laste siden på nytt.
 
         </div>
+
       `;
 
     }
@@ -1024,12 +2033,21 @@ async function loadSchedule(showCachedFirst = true) {
 }
 
 
-function parseDate(dateString) {
+/* =====================================================
+   DATE HELPERS
+===================================================== */
+
+function parseDate(
+  dateString
+) {
 
   const parts =
-    dateString
+    String(
+      dateString
+    )
       .split("-")
       .map(Number);
+
 
   return new Date(
     parts[0],
@@ -1040,67 +2058,104 @@ function parseDate(dateString) {
 }
 
 
-function formatDate(dateString) {
+function formatDate(
+  dateString
+) {
 
-  const date =
-    parseDate(dateString);
+  return new Intl
+    .DateTimeFormat(
+      "no-NO",
+      {
+        weekday:
+          "long",
 
-  return new Intl.DateTimeFormat(
-    "no-NO",
-    {
-      weekday: "long",
-      day: "numeric",
-      month: "long"
-    }
-  ).format(date);
+        day:
+          "numeric",
+
+        month:
+          "long"
+      }
+    )
+    .format(
+      parseDate(
+        dateString
+      )
+    );
 
 }
 
 
-function getDateParts(dateString) {
+function getDateParts(
+  dateString
+) {
 
   const date =
-    parseDate(dateString);
+    parseDate(
+      dateString
+    );
+
 
   const weekday =
-    new Intl.DateTimeFormat(
-      "no-NO",
-      {
-        weekday: "short"
-      }
-    )
-    .format(date)
-    .replace(".", "")
-    .toUpperCase();
+    new Intl
+      .DateTimeFormat(
+        "no-NO",
+        {
+          weekday:
+            "short"
+        }
+      )
+      .format(date)
+      .replace(
+        ".",
+        ""
+      )
+      .toUpperCase();
+
 
   const month =
-    new Intl.DateTimeFormat(
-      "no-NO",
-      {
-        month: "short"
-      }
-    )
-    .format(date)
-    .replace(".", "")
-    .toUpperCase();
+    new Intl
+      .DateTimeFormat(
+        "no-NO",
+        {
+          month:
+            "short"
+        }
+      )
+      .format(date)
+      .replace(
+        ".",
+        ""
+      )
+      .toUpperCase();
+
 
   return {
+
     weekday,
-    day: date.getDate(),
+
+    day:
+      date.getDate(),
+
     month
+
   };
 
 }
 
 
-function isPastRide(dateString) {
+function isPast(
+  dateString
+) {
 
-  const rideDate =
-    parseDate(dateString);
+  const target =
+    parseDate(
+      dateString
+    );
 
-  rideDate.setHours(
+  target.setHours(
     0,0,0,0
   );
+
 
   const today =
     new Date();
@@ -1109,40 +2164,107 @@ function isPastRide(dateString) {
     0,0,0,0
   );
 
-  return rideDate < today;
+
+  return target < today;
 
 }
 
 
-function transportIcon(person) {
+/* =====================================================
+   IMAGES
+===================================================== */
+
+function getVenueImage(
+  venue
+) {
+
+  const text =
+    String(
+      venue || ""
+    ).toLowerCase();
+
+
+  if (
+    text.includes(
+      "nadderud"
+    )
+  ) {
+
+    return (
+      "assets/NA.jpg"
+    );
+
+  }
+
+
+  if (
+    text.includes(
+      "haslum"
+    )
+  ) {
+
+    return (
+      "assets/Haslumhallen.jpg"
+    );
+
+  }
+
+
+  return "";
+
+}
+
+
+/* =====================================================
+   DRIVER HELPERS
+===================================================== */
+
+function transportIcon(
+  person
+) {
 
   if (!person) {
     return "–";
   }
 
-  if (person === "Jentene") {
+
+  if (
+    person ===
+    "Jentene"
+  ) {
+
     return "🚋";
+
   }
 
-  if (person === "Ingen") {
+
+  if (
+    person ===
+    "Ingen"
+  ) {
+
     return "–";
+
   }
+
 
   return "🚗";
 
 }
 
 
-function displayPerson(person) {
+function displayPerson(
+  person
+) {
 
-  if (!person) {
-    return "–";
-  }
-
-  return person;
+  return person || "–";
 
 }
 
+
+/* =====================================================
+   CURRENT WEEK
+===================================================== */
 
 function getCurrentScheduleWeek() {
 
@@ -1153,170 +2275,239 @@ function getCurrentScheduleWeek() {
     0,0,0,0
   );
 
+
   const weeks =
     [...new Set(
       rides.map(
-        ride => ride.week
+        ride =>
+          ride.week
       )
     )];
 
-  for (const week of weeks) {
+
+  for (
+    const week
+    of weeks
+  ) {
 
     const weekRides =
       rides.filter(
         ride =>
-          ride.week === week
+          ride.week ===
+          week
       );
 
-    if (!weekRides.length) {
+
+    if (
+      !weekRides.length
+    ) {
       continue;
     }
 
-    const dates =
-      weekRides
-        .map(
-          ride =>
-            parseDate(ride.date)
-        )
-        .sort(
-          (a,b) => a-b
-        );
 
     const firstDate =
-      new Date(dates[0]);
+      parseDate(
+        weekRides[0]
+          .date
+      );
+
 
     const monday =
-      new Date(firstDate);
+      new Date(
+        firstDate
+      );
+
 
     const day =
       monday.getDay();
+
 
     const diff =
       day === 0
         ? -6
         : 1 - day;
 
+
     monday.setDate(
-      monday.getDate() + diff
+      monday.getDate() +
+      diff
     );
+
 
     monday.setHours(
       0,0,0,0
     );
 
+
     const sunday =
-      new Date(monday);
+      new Date(
+        monday
+      );
+
 
     sunday.setDate(
-      monday.getDate() + 6
+      monday.getDate() +
+      6
     );
+
 
     sunday.setHours(
       23,59,59,999
     );
 
+
     if (
       today >= monday &&
       today <= sunday
     ) {
+
       return week;
+
     }
 
   }
 
+
   const futureRide =
     rides.find(
       ride =>
-        parseDate(ride.date) >= today
+        parseDate(
+          ride.date
+        ) >= today
     );
 
-  if (futureRide) {
-    return futureRide.week;
-  }
 
-  return rides.length
-    ? rides[rides.length - 1].week
-    : null;
+  return futureRide
+    ? futureRide.week
+    : (
+        rides.length
+          ? rides[
+              rides.length - 1
+            ].week
+          : null
+      );
 
 }
 
 
-function renderSchedule() {
+/* =====================================================
+   RENDER CURRENT VIEW
+===================================================== */
 
-  scheduleEl.innerHTML = "";
+function renderCurrentView() {
+
+  if (
+    currentView ===
+    "games"
+  ) {
+
+    renderGames();
+
+  }
+
+  else {
+
+    renderRides();
+
+  }
+
+}
+
+
+/* =====================================================
+   RENDER RIDES
+===================================================== */
+
+function renderRides() {
+
+  content.innerHTML = "";
+
 
   if (!rides.length) {
 
-    scheduleEl.innerHTML = `
+    content.innerHTML = `
       <div class="status">
         Ingen treninger funnet.
       </div>
     `;
 
     return;
+
   }
+
 
   const currentWeek =
     getCurrentScheduleWeek();
 
+
   const allWeeks =
     [...new Set(
       rides.map(
-        ride => ride.week
+        ride =>
+          ride.week
       )
     )];
 
-  let visibleWeeks = [];
 
-  if (currentMode === "all") {
+  let visibleWeeks;
+
+
+  if (
+    currentMode ===
+    "all"
+  ) {
 
     visibleWeeks =
       allWeeks.filter(
         week =>
-          week >= currentWeek
+          week >=
+          currentWeek
       );
 
   }
 
   else {
 
-    const count =
-      Number(currentMode);
-
     visibleWeeks =
       allWeeks
         .filter(
           week =>
-            week >= currentWeek
+            week >=
+            currentWeek
         )
         .slice(
           0,
-          count
+          Number(
+            currentMode
+          )
         );
 
   }
 
+
   visibleWeeks.forEach(
     week => {
+
 
       const weekRides =
         rides.filter(
           ride =>
-            ride.week === week
+            ride.week ===
+            week
         );
 
-      if (!weekRides.length) {
-        return;
-      }
 
-      const allHoliday =
+      const holiday =
         weekRides.every(
           ride =>
-            ride.to === "Ingen" &&
-            ride.from === "Ingen"
+            ride.to ===
+              "Ingen" &&
+            ride.from ===
+              "Ingen"
         );
 
-      if (allHoliday) {
+
+      if (holiday) {
 
         renderHoliday(
           week,
@@ -1324,28 +2515,38 @@ function renderSchedule() {
         );
 
         return;
+
       }
+
 
       const section =
         document.createElement(
           "section"
         );
 
+
       section.className =
         "week-section";
+
 
       const title =
         document.createElement(
           "div"
         );
 
+
       title.className =
         "week-title";
+
 
       let titleText =
         `Uke ${week}`;
 
-      if (week === currentWeek) {
+
+      if (
+        week ===
+        currentWeek
+      ) {
 
         titleText =
           `Denne uken – uke ${week}`;
@@ -1354,19 +2555,21 @@ function renderSchedule() {
 
       else {
 
-        const currentIndex =
+        const ci =
           allWeeks.indexOf(
             currentWeek
           );
 
-        const thisIndex =
+
+        const wi =
           allWeeks.indexOf(
             week
           );
 
+
         if (
-          thisIndex ===
-          currentIndex + 1
+          wi ===
+          ci + 1
         ) {
 
           titleText =
@@ -1376,72 +2579,67 @@ function renderSchedule() {
 
       }
 
+
       title.innerHTML = `
-        <span>📅</span>
-        <span>${titleText}</span>
+
+        <span class="calendar-icon"></span>
+
+        <span>
+          ${titleText}
+        </span>
+
       `;
+
 
       section.appendChild(
         title
       );
 
+
       weekRides.forEach(
         ride => {
 
+
           if (
-            ride.to === "Ingen" &&
-            ride.from === "Ingen"
+            ride.to ===
+              "Ingen" &&
+            ride.from ===
+              "Ingen"
           ) {
+
             return;
+
           }
+
 
           section.appendChild(
             createRideCard(
               ride,
-              week !== currentWeek
+              week !==
+                currentWeek
             )
           );
 
         }
       );
 
-      scheduleEl.appendChild(
+
+      content.appendChild(
         section
       );
 
     }
   );
 
-  const footer =
-    document.createElement(
-      "div"
-    );
 
-  footer.className =
-    "footer-card";
-
-  footer.innerHTML = `
-    <div class="footer-icon">
-      🚗
-    </div>
-
-    <div>
-      <div class="footer-title">
-        Husk samkjøring
-      </div>
-
-      <div class="footer-text">
-        Avtal bytte direkte, og oppdater deretter kjørelisten.
-      </div>
-    </div>
-  `;
-
-  scheduleEl.appendChild(
-    footer
-  );
+  renderFooter();
 
 }
 
+
+/* =====================================================
+   RIDE CARD
+===================================================== */
 
 function createRideCard(
   ride,
@@ -1453,24 +2651,40 @@ function createRideCard(
       ride.date
     );
 
+
   const past =
-    isPastRide(
+    isPast(
       ride.date
     );
+
+
+  const image =
+    getVenueImage(
+      ride.place
+    );
+
 
   const card =
     document.createElement(
       "div"
     );
 
+
   card.className =
     "ride-card" +
-    (nextWeek
-      ? " next-week"
-      : "") +
-    (past
-      ? " past"
-      : "");
+
+    (
+      nextWeek
+        ? " next-week"
+        : ""
+    ) +
+
+    (
+      past
+        ? " past"
+        : ""
+    );
+
 
   card.innerHTML = `
 
@@ -1494,14 +2708,52 @@ function createRideCard(
     <div class="details">
 
       <div class="detail-row">
-        <div class="detail-icon">🕒</div>
-        <div>${ride.time || "–"}</div>
+
+        <div class="detail-icon">
+          🕒
+        </div>
+
+        <div>
+          ${ride.time || "–"}
+        </div>
+
       </div>
 
-      <div class="detail-row">
-        <div class="detail-icon">📍</div>
-        <div>${ride.place || "–"}</div>
+
+      <div class="detail-row venue-row">
+
+        <div class="detail-icon">
+          📍
+        </div>
+
+        <div>
+          ${ride.place || "–"}
+        </div>
+
+        ${
+          image
+            ? `
+              <img
+                src="${image}"
+                class="venue-image"
+                alt="${ride.place}"
+              >
+            `
+            : ""
+        }
+
       </div>
+
+
+      ${
+        ride.changed
+          ? `
+            <div class="changed-badge">
+              ⇄ Endret
+            </div>
+          `
+          : ""
+      }
 
     </div>
 
@@ -1515,11 +2767,15 @@ function createRideCard(
       <div class="assignment-person">
 
         <span class="assignment-icon">
-          ${transportIcon(ride.to)}
+          ${transportIcon(
+            ride.to
+          )}
         </span>
 
         <span>
-          ${displayPerson(ride.to)}
+          ${displayPerson(
+            ride.to
+          )}
         </span>
 
       </div>
@@ -1536,11 +2792,15 @@ function createRideCard(
       <div class="assignment-person">
 
         <span class="assignment-icon">
-          ${transportIcon(ride.from)}
+          ${transportIcon(
+            ride.from
+          )}
         </span>
 
         <span>
-          ${displayPerson(ride.from)}
+          ${displayPerson(
+            ride.from
+          )}
         </span>
 
       </div>
@@ -1550,20 +2810,25 @@ function createRideCard(
 
     <button
       class="swap-button"
-      data-id="${ride.id}"
-      ${past ? "disabled" : ""}
+      ${past
+        ? "disabled"
+        : ""}
     >
 
       <span class="swap-icon">
         ⇄
       </span>
 
-      ${past
-        ? "Utført"
-        : "Bytte"}
+      ${
+        past
+          ? "Utført"
+          : "Bytte"
+      }
 
     </button>
+
   `;
+
 
   if (!past) {
 
@@ -1581,9 +2846,15 @@ function createRideCard(
 
   }
 
+
   return card;
+
 }
 
+
+/* =====================================================
+   HOLIDAY
+===================================================== */
 
 function renderHoliday(
   week,
@@ -1595,20 +2866,10 @@ function renderHoliday(
       "div"
     );
 
+
   holiday.className =
     "holiday";
 
-  const first =
-    getDateParts(
-      weekRides[0].date
-    );
-
-  const last =
-    getDateParts(
-      weekRides[
-        weekRides.length - 1
-      ].date
-    );
 
   holiday.innerHTML = `
 
@@ -1623,25 +2884,328 @@ function renderHoliday(
       </div>
 
       <div class="holiday-text">
-        Ingen trening
-        ${first.day}.–${last.day}.
-        ${last.month.toLowerCase()}.
+        Ingen trening denne uken.
       </div>
 
     </div>
+
   `;
 
-  scheduleEl.appendChild(
+
+  content.appendChild(
     holiday
   );
 
 }
 
 
-function openModal(rideId) {
+/* =====================================================
+   FOOTER
+===================================================== */
+
+function renderFooter() {
+
+  const footer =
+    document.createElement(
+      "div"
+    );
+
+
+  footer.className =
+    "footer-card";
+
+
+  footer.innerHTML = `
+
+    <div class="footer-swap-icon">
+      ⇄
+    </div>
+
+    <div>
+
+      <div class="footer-title">
+        Bytte kjøring
+      </div>
+
+      <div class="footer-text">
+        Avtal bytte direkte, og oppdater deretter kjørelisten.
+      </div>
+
+    </div>
+
+  `;
+
+
+  content.appendChild(
+    footer
+  );
+
+}
+
+
+/* =====================================================
+   GAMES
+===================================================== */
+
+function renderGames() {
+
+  content.innerHTML = "";
+
+
+  const heading =
+    document.createElement(
+      "div"
+    );
+
+
+  heading.className =
+    "games-heading";
+
+
+  heading.innerHTML = `
+
+    <span class="calendar-icon"></span>
+
+    <span>
+      Kamper
+    </span>
+
+  `;
+
+
+  content.appendChild(
+    heading
+  );
+
+
+  if (!games.length) {
+
+    content.innerHTML += `
+
+      <div class="status">
+        Ingen kamper funnet.
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  games.forEach(
+    game => {
+
+      content.appendChild(
+        createGameCard(
+          game
+        )
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   GAME CARD
+===================================================== */
+
+function createGameCard(
+  game
+) {
+
+  const date =
+    getDateParts(
+      game.date
+    );
+
+
+  const past =
+    isPast(
+      game.date
+    );
+
+
+  const image =
+    getVenueImage(
+      game.venue
+    );
+
+
+  const card =
+    document.createElement(
+      "div"
+    );
+
+
+  card.className =
+    "game-card" +
+    (
+      past
+        ? " past"
+        : ""
+    );
+
+
+  const mapUrl =
+    game.address
+      ? (
+          "https://www.google.com/maps/search/?api=1&query=" +
+          encodeURIComponent(
+            game.address
+          )
+        )
+      : "";
+
+
+  card.innerHTML = `
+
+    <div class="game-date-box">
+
+      <div class="date-day">
+        ${date.weekday}
+      </div>
+
+      <div class="date-number">
+        ${date.day}
+      </div>
+
+      <div class="date-month">
+        ${date.month}
+      </div>
+
+      <div class="game-time">
+        ${game.time || ""}
+      </div>
+
+    </div>
+
+
+    <div class="game-info">
+
+      <div class="game-teams">
+
+        ${game.homeTeam || "–"}
+
+        –
+
+        ${game.awayTeam || "–"}
+
+      </div>
+
+
+      <div class="game-meta game-venue-row">
+
+        <span>
+          📍
+        </span>
+
+        <span>
+          ${game.venue || "–"}
+        </span>
+
+        ${
+          image
+            ? `
+              <img
+                src="${image}"
+                class="game-venue-image"
+                alt="${game.venue}"
+              >
+            `
+            : ""
+        }
+
+      </div>
+
+
+      ${
+        game.organizer
+          ? `
+            <div class="game-meta">
+
+              <span>
+                🏟️
+              </span>
+
+              <span>
+                ${game.organizer}
+              </span>
+
+            </div>
+          `
+          : ""
+      }
+
+
+      ${
+        game.address
+          ? `
+            <div class="game-meta">
+
+              <span>
+                📌
+              </span>
+
+              <span>
+                ${game.address}
+              </span>
+
+            </div>
+          `
+          : ""
+      }
+
+
+      ${
+        mapUrl
+          ? `
+            <a
+              class="map-link"
+              href="${mapUrl}"
+              target="_blank"
+              rel="noopener"
+            >
+              📍 Åpne kart
+            </a>
+          `
+          : ""
+      }
+
+
+      ${
+        game.tournament
+          ? `
+            <div class="game-tournament">
+              ${game.tournament}
+            </div>
+          `
+          : ""
+      }
+
+    </div>
+
+  `;
+
+
+  return card;
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+function openModal(
+  rideId
+) {
 
   selectedRideId =
     rideId;
+
 
   const ride =
     rides.find(
@@ -1650,36 +3214,55 @@ function openModal(rideId) {
         String(rideId)
     );
 
+
   if (!ride) {
     return;
   }
 
+
   modalDate.textContent =
-    `${formatDate(ride.date)} · ` +
-    `${ride.time} · ` +
-    `${ride.place}`;
+    `${formatDate(
+      ride.date
+    )} · ${ride.time} · ${ride.place}`;
+
 
   currentTo.innerHTML =
-    `${transportIcon(ride.to)} ` +
-    `${displayPerson(ride.to)}`;
+    `${transportIcon(
+      ride.to
+    )} ${displayPerson(
+      ride.to
+    )}`;
+
 
   currentFrom.innerHTML =
-    `${transportIcon(ride.from)} ` +
-    `${displayPerson(ride.from)}`;
+    `${transportIcon(
+      ride.from
+    )} ${displayPerson(
+      ride.from
+    )}`;
+
 
   newTo.value = "";
   newFrom.value = "";
   pin.value = "";
 
+
   clearModalMessage();
 
-  saveButton.disabled = false;
+
+  saveButton.disabled =
+    false;
+
+
   saveButton.textContent =
     "Lagre endringer";
 
+
   backdrop
     .classList
-    .add("show");
+    .add(
+      "show"
+    );
 
 }
 
@@ -1688,14 +3271,23 @@ function closeModal() {
 
   backdrop
     .classList
-    .remove("show");
+    .remove(
+      "show"
+    );
 
-  selectedRideId = null;
+
+  selectedRideId =
+    null;
+
 
   clearModalMessage();
 
 }
 
+
+/* =====================================================
+   POST
+===================================================== */
 
 function wait(ms) {
 
@@ -1718,7 +3310,8 @@ async function postChange(
     await fetch(
       API_URL,
       {
-        method: "POST",
+        method:
+          "POST",
 
         headers: {
           "Content-Type":
@@ -1732,18 +3325,24 @@ async function postChange(
       }
     );
 
+
   if (!response.ok) {
 
     throw new Error(
-      "HTTP-feil ved lagring."
+      "HTTP-feil"
     );
 
   }
+
 
   return await response.json();
 
 }
 
+
+/* =====================================================
+   SAVE CHANGE
+===================================================== */
 
 async function saveChanges() {
 
@@ -1751,21 +3350,28 @@ async function saveChanges() {
     rides.find(
       item =>
         String(item.id) ===
-        String(selectedRideId)
+        String(
+          selectedRideId
+        )
     );
+
 
   if (!ride) {
     return;
   }
 
+
   const selectedTo =
     newTo.value;
+
 
   const selectedFrom =
     newFrom.value;
 
+
   const enteredPin =
     pin.value.trim();
+
 
   if (
     !selectedTo &&
@@ -1778,7 +3384,9 @@ async function saveChanges() {
     );
 
     return;
+
   }
+
 
   if (
     !/^\d{4}$/.test(
@@ -1792,24 +3400,42 @@ async function saveChanges() {
     );
 
     return;
+
   }
 
-  saveButton.disabled = true;
+
+  saveButton.disabled =
+    true;
+
+
   saveButton.textContent =
     "Lagrer...";
 
+
   clearModalMessage();
 
+
   const payload = {
-    id: ride.id,
-    pin: enteredPin,
-    to: selectedTo,
-    from: selectedFrom
+
+    id:
+      ride.id,
+
+    pin:
+      enteredPin,
+
+    to:
+      selectedTo,
+
+    from:
+      selectedFrom
+
   };
+
 
   try {
 
     let result;
+
 
     try {
 
@@ -1820,11 +3446,14 @@ async function saveChanges() {
 
     }
 
-    catch (firstError) {
+    catch (
+      firstError
+    ) {
 
       await wait(
         1200
       );
+
 
       result =
         await postChange(
@@ -1833,7 +3462,10 @@ async function saveChanges() {
 
     }
 
-    if (!result.success) {
+
+    if (
+      !result.success
+    ) {
 
       showModalMessage(
         result.message ||
@@ -1841,42 +3473,78 @@ async function saveChanges() {
         "error"
       );
 
-      saveButton.disabled = false;
+
+      saveButton.disabled =
+        false;
+
+
       saveButton.textContent =
         "Lagre endringer";
 
+
       return;
+
     }
 
-    if (selectedTo) {
+
+    if (
+      selectedTo
+    ) {
+
       ride.to =
         selectedTo;
+
     }
 
-    if (selectedFrom) {
+
+    if (
+      selectedFrom
+    ) {
+
       ride.from =
         selectedFrom;
+
     }
+
+
+    /*
+      Lokal markering.
+      Når backend senere støtter changed,
+      blir denne felles for alle.
+    */
+
+    ride.changed =
+      true;
+
 
     try {
 
       localStorage.setItem(
         STORAGE_KEY,
-        JSON.stringify(rides)
+        JSON.stringify({
+          rides,
+          games
+        })
       );
 
     }
 
     catch (error) {}
 
-    renderSchedule();
+
+    renderRides();
+
 
     showModalMessage(
       "✓ Kjørelisten er oppdatert.",
       "success"
     );
 
-    loadSchedule(false);
+
+    loadAllData(
+      false
+    );
+
 
     setTimeout(
       closeModal,
@@ -1887,14 +3555,21 @@ async function saveChanges() {
 
   catch (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
+
 
     showModalMessage(
       "Kunne ikke lagre. Prøv igjen.",
       "error"
     );
 
-    saveButton.disabled = false;
+
+    saveButton.disabled =
+      false;
+
+
     saveButton.textContent =
       "Lagre endringer";
 
@@ -1903,6 +3578,10 @@ async function saveChanges() {
 }
 
 
+/* =====================================================
+   MODAL MESSAGES
+===================================================== */
+
 function showModalMessage(
   text,
   type
@@ -1910,6 +3589,7 @@ function showModalMessage(
 
   modalMessage.className =
     `modal-message ${type}`;
+
 
   modalMessage.textContent =
     text;
@@ -1922,11 +3602,140 @@ function clearModalMessage() {
   modalMessage.className =
     "modal-message";
 
+
   modalMessage.textContent =
     "";
 
 }
 
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+ridesNav.addEventListener(
+  "click",
+  () => {
+
+    currentView =
+      "rides";
+
+
+    ridesNav
+      .classList
+      .add(
+        "active"
+      );
+
+
+    gamesNav
+      .classList
+      .remove(
+        "active"
+      );
+
+
+    rideToolbar
+      .classList
+      .remove(
+        "hidden"
+      );
+
+
+    renderRides();
+
+  }
+);
+
+
+gamesNav.addEventListener(
+  "click",
+  () => {
+
+    currentView =
+      "games";
+
+
+    gamesNav
+      .classList
+      .add(
+        "active"
+      );
+
+
+    ridesNav
+      .classList
+      .remove(
+        "active"
+      );
+
+
+    rideToolbar
+      .classList
+      .add(
+        "hidden"
+      );
+
+
+    renderGames();
+
+  }
+);
+
+
+/* =====================================================
+   PERIOD BUTTONS
+===================================================== */
+
+document
+  .querySelectorAll(
+    ".tab"
+  )
+  .forEach(
+    tab => {
+
+      tab.addEventListener(
+        "click",
+        () => {
+
+
+          document
+            .querySelectorAll(
+              ".tab"
+            )
+            .forEach(
+              item =>
+                item
+                  .classList
+                  .remove(
+                    "active"
+                  )
+            );
+
+
+          tab
+            .classList
+            .add(
+              "active"
+            );
+
+
+          currentMode =
+            tab.dataset.mode;
+
+
+          renderRides();
+
+        }
+      );
+
+    }
+  );
+
+
+/* =====================================================
+   MODAL BUTTONS
+===================================================== */
 
 document
   .getElementById(
@@ -1966,7 +3775,9 @@ backdrop.addEventListener(
       event.target ===
       backdrop
     ) {
+
       closeModal();
+
     }
 
   }
@@ -1978,58 +3789,25 @@ document.addEventListener(
   event => {
 
     if (
-      event.key === "Escape"
+      event.key ===
+      "Escape"
     ) {
+
       closeModal();
+
     }
 
   }
 );
 
 
-document
-  .querySelectorAll(
-    ".tab"
-  )
-  .forEach(
-    tab => {
+/* =====================================================
+   START
+===================================================== */
 
-      tab.addEventListener(
-        "click",
-        () => {
-
-          document
-            .querySelectorAll(
-              ".tab"
-            )
-            .forEach(
-              item =>
-                item
-                  .classList
-                  .remove(
-                    "active"
-                  )
-            );
-
-          tab
-            .classList
-            .add(
-              "active"
-            );
-
-          currentMode =
-            tab.dataset.mode;
-
-          renderSchedule();
-
-        }
-      );
-
-    }
-  );
-
-
-loadSchedule(true);
+loadAllData(
+  true
+);
 
 </script>
 
