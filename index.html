@@ -1577,6 +1577,7 @@ let games = [];
 let currentMode = "2";
 let currentView = "rides";
 let selectedRideId = null;
+let pendingGameScroll = false;
 
 
 const content =
@@ -2045,7 +2046,7 @@ function renderCurrentView() {
     currentView === "games"
   ) {
 
-    renderGames();
+    renderGames(pendingGameScroll);
 
   }
 
@@ -2553,7 +2554,7 @@ function renderFooter() {
 }
 
 
-function renderGames() {
+function renderGames(scrollToUpcoming = false) {
 
   content.innerHTML = "";
 
@@ -2608,6 +2609,28 @@ function renderGames() {
 
     }
   );
+
+  // Ved åpning av kampoversikten: vis første kamp fra og med i dag.
+  // Tidligere kamper beholdes over denne, slik at man kan scrolle opp.
+  if (scrollToUpcoming) {
+    pendingGameScroll = false;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const nextIndex = games.findIndex(
+      game => parseDate(game.date) >= today
+    );
+    const targetIndex = nextIndex >= 0 ? nextIndex : games.length - 1;
+
+    requestAnimationFrame(() => {
+      const cards = content.querySelectorAll(".game-card");
+      const target = cards[targetIndex];
+      if (target && currentView === "games") {
+        const top = target.getBoundingClientRect().top + window.scrollY - 16;
+        window.scrollTo({ top: Math.max(0, top), behavior: "instant" });
+      }
+    });
+  }
 
 }
 
@@ -3189,7 +3212,8 @@ gamesNav.addEventListener(
       .add("hidden");
 
 
-    renderGames();
+    pendingGameScroll = true;
+    renderGames(true);
 
   }
 );
