@@ -169,8 +169,7 @@ button {
 
   background: white;
 
-  position: sticky;
-  top: 0;
+  position: static;
 
   z-index: 10;
 }
@@ -1284,6 +1283,7 @@ select {
 
 <div class="app">
 
+<div class="sticky-shell" id="stickyShell">
 <header class="header">
 
   <div class="header-row">
@@ -1328,6 +1328,7 @@ select {
   </button>
 
 </div>
+</div><!-- sticky-shell -->
 
 
 <div
@@ -2626,7 +2627,9 @@ function renderGames(scrollToUpcoming = false) {
       const cards = content.querySelectorAll(".game-card");
       const target = cards[targetIndex];
       if (target && currentView === "games") {
-        const top = target.getBoundingClientRect().top + window.scrollY - 16;
+        const stickyShell = document.getElementById("stickyShell");
+        const stickyHeight = stickyShell ? stickyShell.getBoundingClientRect().height : 0;
+        const top = target.getBoundingClientRect().top + window.scrollY - stickyHeight - 12;
         window.scrollTo({ top: Math.max(0, top), behavior: "instant" });
       }
     });
